@@ -11,6 +11,12 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // 0. Redirecionamento rápido se acessado via app.liq.ao na raiz
+  if (window.location.hostname.startsWith('app.liq.ao')) {
+    window.location.replace('/auth/login/index.html');
+    return;
+  }
+
   // 1. FAQ Accordion
   const faqItems = document.querySelectorAll('.faq-item');
   faqItems.forEach(item => {

@@ -1,0 +1,22 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # 1. Redirecionamento rápido de app.liq.ao diretamente para o login do restaurante
+    RewriteCond %{HTTP_HOST} ^app\.liq\.ao$ [NC]
+    RewriteCond %{REQUEST_URI} ^/?$ [OR]
+    RewriteCond %{REQUEST_URI} ^/index\.html$ [NC]
+    RewriteRule ^.*$ /auth/login/ [R=302,L]
+
+    # 2. Roteamento amigável para app.liq.ao/user/{nome-restaurante}
+    RewriteCond %{HTTP_HOST} ^app\.liq\.ao$ [NC]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^user/([^/]+)/?$ /user/index.html?restaurant=$1 [QSA,L]
+</IfModule>
+
+# Configurações de Cache & Segurança para Frontend
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>

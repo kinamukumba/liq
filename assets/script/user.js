@@ -7,13 +7,52 @@
 
 const UserDashboard = {
   restaurantId: 1,
+  restaurantName: 'Café Central',
+  restaurantSlug: 'cafe-central',
   autoRefreshTimer: null,
 
   async init() {
+    this.resolveRestaurant();
     this.bindNavigation();
     await this.loadMetrics();
     await this.loadKitchenOrders();
     this.startAutoRefresh();
+  },
+
+  resolveRestaurant() {
+    // 1. Tenta identificar do caminho da URL (ex: app.liq.ao/user/{nome-restaurante})
+    const pathParts = window.location.pathname.split('/').filter(Boolean);
+    const userIdx = pathParts.indexOf('user');
+    if (userIdx !== -1 && pathParts[userIdx + 1]) {
+      const slugCandidate = pathParts[userIdx + 1].replace(/\.html$/i, '');
+      if (slugCandidate && slugCandidate !== 'index') {
+        this.restaurantSlug = slugCandidate;
+      }
+    }
+
+    // 2. Tenta identificar de query string: ?restaurant=slug
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('restaurant')) {
+      this.restaurantSlug = urlParams.get('restaurant');
+    }
+
+    // 3. Tenta carregar da sessão autenticada em localStorage
+    try {
+      const authData = JSON.parse(localStorage.getItem('liq_auth_user') || '{}');
+      if (authData.restaurant_id) {
+        this.restaurantId = parseInt(authData.restaurant_id, 10);
+      }
+      if (authData.restaurant_name) {
+        this.restaurantName = authData.restaurant_name;
+        const brandNameEl = document.querySelector('.app-brand-text');
+        if (brandNameEl) brandNameEl.textContent = this.restaurantName;
+      }
+      if (authData.restaurant_slug) {
+        this.restaurantSlug = authData.restaurant_slug;
+      }
+    } catch (e) {
+      console.warn('Falha ao restaurar dados da sessão:', e);
+    }
   },
 
   bindNavigation() {
