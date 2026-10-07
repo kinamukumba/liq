@@ -83,21 +83,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const res = await useApi.post('/auth/login', payload);
 
-        if (res.success) {
-          useAlert.sucesso('Credenciais autenticadas com sucesso! Entrando...', 'Acesso Autorizado');
-          setTimeout(() => {
-            window.location.href = '../../user/index.html';
-          }, 900);
-        } else {
-          // Suporte a demonstração para admin@cafecentral.ao
-          if (emailVal.toLowerCase() === 'admin@cafecentral.ao' || emailVal.length > 3) {
-            useAlert.sucesso('Bem-vindo de volta ao Café Central!', 'Acesso Autorizado');
-            setTimeout(() => {
-              window.location.href = '../../user/index.html';
-            }, 900);
-            return;
-          }
+        if (res.success && res.data) {
+          localStorage.setItem('liq_auth_user', JSON.stringify(res.data));
+          const isAppDomain = window.location.hostname.includes('app.liq.ao');
+          const targetUrl = isAppDomain
+            ? `/user/${res.data.restaurant_slug || 'restaurante'}`
+            : '../../user/index.html';
 
+          useAlert.sucesso(`Bem-vindo de volta, ${res.data.name}! Entrando...`, 'Acesso Autorizado');
+          setTimeout(() => {
+            window.location.href = targetUrl;
+          }, 800);
+        } else {
           useAlert.erro(res.message || 'Credenciais inválidas. Verifique o seu e-mail e senha.', 'Falha de Autenticação');
           passwordInput.classList.add('is-invalid');
           passwordInput.focus();
