@@ -1,0 +1,12 @@
+# Permitir acesso apenas a formatos de imagem seguros
+<FilesMatch "\.(?i:jpe?g|png|gif|webp|svg)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Bloquear qualquer execução de scripts PHP no diretório de uploads
+<FilesMatch "\.(?i:php|phtml|php3|php4|php5|php7|phps|cgi|pl|exe)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+Options -Indexes -ExecCGI

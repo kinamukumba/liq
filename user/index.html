@@ -6,82 +6,118 @@
   <title>Painel do Restaurante | LIQ SAAS</title>
   <link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
-  <!-- Estilos Externos Estritos (Sem CSS interno nem inline) -->
+  <!-- Estilos Externos Oficiais (Estritamente sem CSS inline e sem tags style) -->
   <link rel="stylesheet" href="../assets/style/global.css">
   <link rel="stylesheet" href="../assets/style/components.css">
   <link rel="stylesheet" href="../assets/style/user.css">
 </head>
-<body>
+<body class="dashboard-body">
 
   <div class="app-layout">
     
-    <!-- Sidebar Oficial -->
+    <!-- ====================================================
+         1. SIDEBAR OFICIAL DO RESTAURANTE
+         ==================================================== -->
     <aside class="app-sidebar">
       <div class="app-sidebar-header">
         <div class="sidebar-brand-wrapper">
-          <img src="../assets/images/logo-white.png" alt="LIQ" class="brand-logo-img">
+          <img src="../assets/images/logo-white.png" alt="LIQ SAAS" class="brand-logo-img">
         </div>
-        <span class="sidebar-brand-tag">SaaS</span>
+        <span class="sidebar-brand-tag">Restaurante</span>
       </div>
 
       <nav class="app-sidebar-nav">
-        <div class="nav-section-title">Operação do Restaurante</div>
+        <div class="nav-section-title">Operação Principal</div>
+        
         <button type="button" class="nav-link active" data-target-panel="panel-dashboard">
-          <span class="nav-icon" data-icon="dashboard"></span>
+          <span class="nav-icon" data-icon="dashboard" data-icon-size="18"></span>
           <span>Visão Geral</span>
         </button>
+
         <button type="button" class="nav-link" data-target-panel="panel-kitchen">
-          <span class="nav-icon" data-icon="clock"></span>
-          <span>Pedidos em Tempo Real</span>
-        </button>
-        <button type="button" class="nav-link" data-target-panel="panel-tables">
-          <span class="nav-icon" data-icon="tables"></span>
-          <span>Gestão de Mesas</span>
+          <span class="nav-icon" data-icon="clock" data-icon-size="18"></span>
+          <span>Cozinha & Salão (KDS)</span>
+          <span class="nav-counter-badge" id="sidebar-kds-counter">0</span>
         </button>
 
-        <div class="nav-section-title">Clientes & Campanhas</div>
+        <button type="button" class="nav-link" data-target-panel="panel-tables">
+          <span class="nav-icon" data-icon="tables" data-icon-size="18"></span>
+          <span>Gestão de Mesas</span>
+          <span class="nav-counter-badge badge-tables" id="sidebar-tables-counter">0/0</span>
+        </button>
+
+        <button type="button" class="nav-link" data-target-panel="panel-menu">
+          <span class="nav-icon" data-icon="menu" data-icon-size="18"></span>
+          <span>Cardápio & Produtos</span>
+        </button>
+
+        <div class="nav-section-title">Relacionamento & Vendas</div>
+
         <button type="button" class="nav-link" data-target-panel="panel-crm">
-          <span class="nav-icon" data-icon="customers"></span>
+          <span class="nav-icon" data-icon="customers" data-icon-size="18"></span>
           <span>Clientes & CRM</span>
         </button>
+
         <button type="button" class="nav-link" data-target-panel="panel-coupons">
-          <span class="nav-icon" data-icon="coupons"></span>
+          <span class="nav-icon" data-icon="coupons" data-icon-size="18"></span>
           <span>Cupons & Campanhas</span>
+        </button>
+
+        <div class="nav-section-title">Sistema</div>
+
+        <button type="button" class="nav-link" data-target-panel="panel-settings">
+          <span class="nav-icon" data-icon="settings" data-icon-size="18"></span>
+          <span>Configurações</span>
         </button>
       </nav>
 
       <div class="app-sidebar-footer">
         <div class="user-profile-badge">
-          <div class="user-avatar-initials">GC</div>
+          <div class="user-avatar-initials" id="sidebar-user-avatar">GC</div>
           <div class="user-details">
-            <div class="user-name">Gestor Central</div>
-            <div class="user-role">Restaurateur (Owner)</div>
+            <div class="user-name" id="sidebar-user-name">Gestor Central</div>
+            <div class="user-role" id="sidebar-user-role">Restaurateur (Owner)</div>
           </div>
+          <button type="button" id="btn-sidebar-logout" class="sidebar-logout-btn" title="Encerrar Sessão" aria-label="Sair">
+            <span data-icon="logout" data-icon-size="16"></span>
+          </button>
         </div>
       </div>
     </aside>
 
-    <!-- Área Principal de Conteúdo -->
+    <!-- ====================================================
+         2. ÁREA PRINCIPAL DE CONTEÚDO (HEADER + PANELS)
+         ==================================================== -->
     <div class="app-main">
       
-      <!-- Cabeçalho Superior -->
+      <!-- Top Header -->
       <header class="app-header">
         <div class="header-title-group">
-          <h1 id="page-header-title">Visão Geral & Indicadores</h1>
-          <p class="text-muted">Café Central &bull; Sistema Multi-Tenant</p>
+          <div class="d-flex items-center gap-2">
+            <h1 id="page-header-title">Visão Geral & Indicadores</h1>
+            <span class="badge badge-ready header-badge-status">
+              <span class="badge-dot"></span> Operação Ativa
+            </span>
+          </div>
+          <p class="header-subtitle" id="header-restaurant-info">
+            <span id="header-restaurant-name">Café Central</span> &bull; Multi-Tenant LIQ SAAS
+          </p>
         </div>
 
         <div class="header-actions">
-          <span class="badge badge-ready">
-            <span class="badge-dot"></span> Operação Ativa
-          </span>
-          <button type="button" id="btn-manual-refresh" class="btn btn-secondary btn-sm">
-            <span data-icon="refresh" data-icon-size="14"></span>
-            Atualizar
+          <button type="button" id="btn-open-new-order-modal" class="btn btn-primary btn-sm">
+            <span data-icon="plus" data-icon-size="14"></span>
+            <span>Novo Pedido</span>
           </button>
-          <a href="../client/index.html?t=07" target="_blank" class="btn btn-outline btn-sm">
+
+          <button type="button" id="btn-manual-refresh" class="btn btn-secondary btn-sm" title="Sincronizar dados em tempo real">
+            <span data-icon="refresh" data-icon-size="14"></span>
+            <span>Atualizar</span>
+          </button>
+
+          <a href="../client/index.html?t=07" target="_blank" class="btn btn-outline btn-sm" title="Abrir cardápio digital como cliente">
             <span data-icon="qr" data-icon-size="14"></span>
-            Simular Mesa 07
+            <span>Simular Mesa 07</span>
           </a>
         </div>
       </header>
@@ -89,238 +125,487 @@
       <!-- Conteúdo com Painéis Chaveáveis via usePanels -->
       <main class="app-content">
 
-        <!-- PAINEL 1: DASHBOARD & INDICADORES -->
+        <!-- ====================================================
+             PAINEL 1: VISÃO GERAL (DASHBOARD & GRÁFICOS)
+             ==================================================== -->
         <section id="panel-dashboard" class="tab-panel active">
           
-          <!-- KPIs de Vendas & Clientes -->
+          <!-- Barra de Filtro de Período -->
+          <div class="dashboard-filter-bar">
+            <div class="filter-period-group">
+              <span class="filter-label">Período de Análise:</span>
+              <button type="button" class="filter-period-btn active" data-period="today">Hoje</button>
+              <button type="button" class="filter-period-btn" data-period="yesterday">Ontem</button>
+              <button type="button" class="filter-period-btn" data-period="7d">Últimos 7 dias</button>
+              <button type="button" class="filter-period-btn" data-period="30d">Este Mês</button>
+            </div>
+            <div class="dashboard-live-indicator">
+              <span class="pulse-indicator"></span>
+              <span class="text-xs text-muted" id="dashboard-last-sync">Atualizado em tempo real</span>
+            </div>
+          </div>
+
+          <!-- Cards de KPIs Principais -->
           <div class="metrics-grid">
             <div class="card-metric">
-              <span class="card-metric-label">Vendas Hoje</span>
+              <div class="card-metric-header">
+                <span class="card-metric-label">Faturamento Hoje</span>
+                <span class="card-metric-icon bg-mint" data-icon="dollar" data-icon-size="16"></span>
+              </div>
               <span class="card-metric-value text-green" id="kpi-sales-today">0,00 Kz</span>
-              <span class="card-metric-trend trend-neutral" id="kpi-growth">Aguardando dados</span>
+              <div class="card-metric-trend trend-neutral" id="kpi-growth">
+                <span>Calculando variação...</span>
+              </div>
             </div>
 
             <div class="card-metric">
-              <span class="card-metric-label">Pedidos Hoje</span>
+              <div class="card-metric-header">
+                <span class="card-metric-label">Pedidos Concluídos</span>
+                <span class="card-metric-icon bg-mint" data-icon="orders" data-icon-size="16"></span>
+              </div>
               <span class="card-metric-value" id="kpi-orders-today">0</span>
-              <span class="card-metric-trend text-light">Ciclo diário</span>
+              <div class="card-metric-trend text-light" id="kpi-orders-sub">
+                <span>Tempo médio de preparo: <strong id="kpi-prep-time">18 min</strong></span>
+              </div>
             </div>
 
             <div class="card-metric">
-              <span class="card-metric-label">Ticket Médio</span>
+              <div class="card-metric-header">
+                <span class="card-metric-label">Ticket Médio</span>
+                <span class="card-metric-icon bg-mint" data-icon="analytics" data-icon-size="16"></span>
+              </div>
               <span class="card-metric-value" id="kpi-avg-ticket">0,00 Kz</span>
-              <span class="card-metric-trend text-light">Por pedido concluído</span>
+              <div class="card-metric-trend text-light">
+                <span>Média por pedido fechado</span>
+              </div>
             </div>
 
             <div class="card-metric">
-              <span class="card-metric-label">Clientes Únicos</span>
+              <div class="card-metric-header">
+                <span class="card-metric-label">Clientes & Fidelização</span>
+                <span class="card-metric-icon bg-mint" data-icon="customers" data-icon-size="16"></span>
+              </div>
               <span class="card-metric-value" id="kpi-total-clients">0</span>
-              <span class="card-metric-trend trend-up" id="kpi-return-rate">0% recorrentes</span>
+              <div class="card-metric-trend trend-up" id="kpi-return-rate">
+                <span>0% taxa de retorno</span>
+              </div>
             </div>
           </div>
 
-          <!-- Distribuição dos Pedidos -->
-          <div class="card mb-6">
-            <div class="card-header">
-              <span class="card-title">Distribuição dos Pedidos de Hoje</span>
-              <div id="tables-summary-stat"></div>
-            </div>
-            <div class="card-body">
-              <div id="orders-status-pills" class="d-flex flex-wrap gap-2"></div>
-            </div>
-          </div>
-
-          <!-- Grid Dividido: Ranking de Produtos e Horários de Pico -->
-          <div class="dashboard-split-grid">
+          <!-- Grid de Gráficos Principais (Vendas & Status) -->
+          <div class="charts-main-grid">
             
+            <!-- Gráfico 1: Tendência de Vendas (SVG Interativo) -->
+            <div class="card chart-card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Tendência de Vendas (Últimos 7 Dias)</h2>
+                  <div class="card-subtitle">Evolução do faturamento diário em Kwanzas (Kz)</div>
+                </div>
+                <div class="chart-badge-tag">
+                  <span data-icon="trendingUp" data-icon-size="14"></span>
+                  <span>Faturamento</span>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart-container" id="sales-area-chart-container">
+                  <!-- SVG gerado dinamicamente via JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Gráfico 2: Distribuição de Pedidos por Status (Donut SVG) -->
+            <div class="card chart-card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Status dos Pedidos de Hoje</h2>
+                  <div class="card-subtitle">Proporção operacional em tempo real</div>
+                </div>
+                <div id="tables-summary-stat"></div>
+              </div>
+              <div class="card-body">
+                <div class="donut-chart-wrapper" id="orders-donut-chart-container">
+                  <!-- SVG Donut gerado dinamicamente -->
+                </div>
+                <div id="orders-status-pills" class="status-legend-grid"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Grid Duplo Inferior: Ranking de Produtos & Horários de Pico -->
+          <div class="dashboard-split-grid mt-6">
+            
+            <!-- Ranking de Produtos Mais Vendidos -->
             <div class="card">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Produtos Mais Vendidos</h2>
                   <div class="card-subtitle">Ranking por volume de itens consumidos</div>
                 </div>
-                <span data-icon="products" data-icon-size="18"></span>
+                <span class="header-icon-pill" data-icon="products" data-icon-size="18"></span>
               </div>
-              <div class="card-body" id="top-products-list"></div>
+              <div class="card-body" id="top-products-list">
+                <!-- Preenchido dinamicamente via user.js -->
+              </div>
             </div>
 
+            <!-- Horários de Pico (Gráfico de Barras SVG) -->
             <div class="card">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Horários de Pico</h2>
-                  <div class="card-subtitle">Volume de pedidos por hora do dia</div>
+                  <div class="card-subtitle">Concentração de pedidos por hora do dia</div>
                 </div>
-                <span data-icon="analytics" data-icon-size="18"></span>
+                <span class="header-icon-pill" data-icon="clock" data-icon-size="18"></span>
               </div>
-              <div class="card-body" id="peak-hours-chart"></div>
+              <div class="card-body" id="peak-hours-chart">
+                <!-- Preenchido dinamicamente via user.js -->
+              </div>
             </div>
 
           </div>
 
+          <!-- Tabela de Pedidos Recentes no Dashboard -->
+          <div class="card mt-6">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Últimos Pedidos Recebidos</h2>
+                <div class="card-subtitle">Transações registradas diretamente nas mesas e no balcão</div>
+              </div>
+              <button type="button" class="btn btn-outline btn-xs" data-target-panel="panel-kitchen" id="btn-see-all-kds">
+                <span>Ver Todos no KDS</span>
+                <span data-icon="chevronRight" data-icon-size="12"></span>
+              </button>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Comanda / ID</th>
+                      <th>Mesa</th>
+                      <th>Cliente</th>
+                      <th>Total</th>
+                      <th>Status</th>
+                      <th>Horário</th>
+                      <th class="text-right">Ação</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dashboard-recent-orders-tbody">
+                    <!-- Preenchido dinamicamente via user.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
         </section>
 
-        <!-- PAINEL 2: PEDIDOS EM TEMPO REAL (KDS) -->
+        <!-- ====================================================
+             PAINEL 2: PEDIDOS EM TEMPO REAL (KDS COZINHA)
+             ==================================================== -->
         <section id="panel-kitchen" class="tab-panel">
-          <div class="d-flex justify-between items-center mb-4">
-            <div>
-              <h2 class="text-md font-bold">Quadro Operacional de Pedidos (KDS)</h2>
-              <p class="text-sm text-muted">Pedidos ativos em fluxo contínuo. Atualização automática a cada 10 segundos.</p>
+          
+          <div class="kds-top-bar">
+            <div class="kds-filter-tabs">
+              <button type="button" class="kds-tab-btn active" data-filter-status="ALL">
+                <span>Todos</span>
+                <span class="kds-tab-count" id="count-kds-all">0</span>
+              </button>
+              <button type="button" class="kds-tab-btn" data-filter-status="PENDING">
+                <span>Pendentes</span>
+                <span class="kds-tab-count" id="count-kds-pending">0</span>
+              </button>
+              <button type="button" class="kds-tab-btn" data-filter-status="CONFIRMED">
+                <span>Confirmados</span>
+                <span class="kds-tab-count" id="count-kds-confirmed">0</span>
+              </button>
+              <button type="button" class="kds-tab-btn" data-filter-status="PREPARING">
+                <span>Em Preparo</span>
+                <span class="kds-tab-count" id="count-kds-preparing">0</span>
+              </button>
+              <button type="button" class="kds-tab-btn" data-filter-status="READY">
+                <span>Prontos</span>
+                <span class="kds-tab-count" id="count-kds-ready">0</span>
+              </button>
             </div>
           </div>
 
-          <div id="kitchen-orders-grid" class="kds-grid"></div>
+          <!-- Grid Vivo de Comandas KDS -->
+          <div id="kitchen-orders-grid" class="kds-grid">
+            <!-- Cards de pedidos gerados dinamicamente via user.js -->
+          </div>
+
         </section>
 
-        <!-- PAINEL 3: GESTÃO DE MESAS -->
+        <!-- ====================================================
+             PAINEL 3: GESTÃO DE MESAS & QR CODES
+             ==================================================== -->
         <section id="panel-tables" class="tab-panel">
-          <div class="mb-4">
-            <h2 class="text-md font-bold">Mesas Cadastradas & Códigos de Acesso</h2>
-            <p class="text-sm text-muted">Cada mesa possui identificador único e QR Code exclusivo para acesso do cliente.</p>
-          </div>
-
-          <div class="tables-grid">
-            <div class="card">
-              <div class="card-header">
-                <div>
-                  <span class="card-title">Mesa 01</span>
-                  <div class="card-subtitle">Código: T01</div>
-                </div>
-                <span class="badge badge-available">Disponível</span>
-              </div>
-              <div class="card-body">
-                <p class="text-xs text-muted">URL Pública Segura:</p>
-                <p class="text-xs font-medium text-green mt-1">/client/index.html?t=01</p>
-              </div>
-              <div class="card-footer">
-                <a href="../client/index.html?t=01" target="_blank" class="btn btn-sm btn-secondary">Abrir Menu</a>
-              </div>
+          
+          <div class="d-flex justify-between items-center mb-6 flex-wrap gap-4">
+            <div>
+              
             </div>
-
-            <div class="card">
-              <div class="card-header">
-                <div>
-                  <span class="card-title">Mesa 02</span>
-                  <div class="card-subtitle">Código: T02</div>
-                </div>
-                <span class="badge badge-available">Disponível</span>
-              </div>
-              <div class="card-body">
-                <p class="text-xs text-muted">URL Pública Segura:</p>
-                <p class="text-xs font-medium text-green mt-1">/client/index.html?t=02</p>
-              </div>
-              <div class="card-footer">
-                <a href="../client/index.html?t=02" target="_blank" class="btn btn-sm btn-secondary">Abrir Menu</a>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-header">
-                <div>
-                  <span class="card-title">Mesa 03</span>
-                  <div class="card-subtitle">Código: T03</div>
-                </div>
-                <span class="badge badge-available">Disponível</span>
-              </div>
-              <div class="card-body">
-                <p class="text-xs text-muted">URL Pública Segura:</p>
-                <p class="text-xs font-medium text-green mt-1">/client/index.html?t=03</p>
-              </div>
-              <div class="card-footer">
-                <a href="../client/index.html?t=03" target="_blank" class="btn btn-sm btn-secondary">Abrir Menu</a>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-header">
-                <div>
-                  <span class="card-title">Mesa 07 (Oficial)</span>
-                  <div class="card-subtitle">Código: T07</div>
-                </div>
-                <span class="badge badge-ready">Ativa</span>
-              </div>
-              <div class="card-body">
-                <p class="text-xs text-muted">URL Pública Segura:</p>
-                <p class="text-xs font-medium text-green mt-1">/client/index.html?t=07</p>
-              </div>
-              <div class="card-footer">
-                <a href="../client/index.html?t=07" target="_blank" class="btn btn-sm btn-primary">Abrir Menu Mesa 07</a>
-              </div>
+            <div class="d-flex items-center gap-3">
+              <button type="button" class="btn btn-primary btn-sm" id="btn-open-new-table-modal">
+                <span data-icon="plus" data-icon-size="14"></span>
+                <span>Cadastrar Mesa</span>
+              </button>
             </div>
           </div>
+
+          <!-- Métricas de Mesas -->
+          <div class="tables-stats-row">
+            <div class="table-stat-card">
+              <span class="table-stat-val" id="stat-tables-total">0</span>
+              <span class="table-stat-lbl">Total de Mesas</span>
+            </div>
+            <div class="table-stat-card border-green">
+              <span class="table-stat-val text-green" id="stat-tables-available">0</span>
+              <span class="table-stat-lbl">Livres / Disponíveis</span>
+            </div>
+            <div class="table-stat-card border-orange">
+              <span class="table-stat-val text-orange" id="stat-tables-occupied">0</span>
+              <span class="table-stat-lbl">Ocupadas</span>
+            </div>
+            <div class="table-stat-card border-gray">
+              <span class="table-stat-val text-gray" id="stat-tables-cleaning">0</span>
+              <span class="table-stat-lbl">Em Limpeza</span>
+            </div>
+          </div>
+
+          <!-- Grid Dinâmico de Mesas -->
+          <div class="tables-grid mt-6" id="tables-cards-container">
+            <!-- Cards de mesas gerados dinamicamente via user.js -->
+          </div>
+
         </section>
 
-        <!-- PAINEL 4: CRM DE CLIENTES -->
+        <!-- ====================================================
+             PAINEL 4: CARDÁPIO DIGITAL & PRODUTOS
+             ==================================================== -->
+        <section id="panel-menu" class="tab-panel">
+          
+          <div class="d-flex justify-between items-center mb-6 flex-wrap gap-4">
+            <div>
+            </div>
+            <div class="d-flex items-center gap-3">
+              <button type="button" class="btn btn-outline btn-sm" id="btn-open-category-modal">
+                <span data-icon="plus" data-icon-size="14"></span>
+                <span>Nova Categoria</span>
+              </button>
+              <button type="button" class="btn btn-primary btn-sm" id="btn-open-product-modal">
+                <span data-icon="plus" data-icon-size="14"></span>
+                <span>Novo Produto</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Filtros de Produtos -->
+          <div class="menu-filter-bar">
+            <div class="menu-search-wrapper">
+              <span class="search-input-icon" data-icon="search" data-icon-size="16"></span>
+              <input type="text" id="menu-search-input" class="form-input search-input" placeholder="Buscar produto pelo nome...">
+            </div>
+            <div class="menu-category-select-wrapper">
+              <select id="menu-category-filter" class="form-select">
+                <option value="ALL">Todas as Categorias</option>
+                <!-- Preenchido dinamicamente -->
+              </select>
+            </div>
+          </div>
+
+          <!-- Tabela de Produtos -->
+          <div class="card mt-4">
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="w-16">Item</th>
+                      <th>Nome do Produto</th>
+                      <th>Categoria</th>
+                      <th>Preço (Kz)</th>
+                      <th>Disponibilidade</th>
+                      <th class="text-right">Ação</th>
+                    </tr>
+                  </thead>
+                  <tbody id="menu-products-tbody">
+                    <!-- Linhas geradas dinamicamente via user.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ====================================================
+             PAINEL 5: CLIENTES & BASE CRM
+             ==================================================== -->
         <section id="panel-crm" class="tab-panel">
-          <div class="mb-4">
-            <h2 class="text-md font-bold">Base de Clientes & CRM</h2>
-            <p class="text-sm text-muted">Reconhecimento persistente, retenção e histórico de pedidos por cliente.</p>
+          
+          <div class="d-flex justify-between items-center mb-6 flex-wrap gap-4">
+            <div>
+            </div>
           </div>
 
-          <div class="table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Cliente</th>
-                  <th>Telefone / WhatsApp</th>
-                  <th>Status</th>
-                  <th>Último Pedido</th>
-                </tr>
-              </thead>
-              <tbody id="crm-table-tbody">
-                <tr>
-                  <td class="font-medium">Kina</td>
-                  <td>+244 923 123 456</td>
-                  <td><span class="badge badge-ready">Ativo</span></td>
-                  <td>Hoje</td>
-                </tr>
-              </tbody>
-            </table>
+          <!-- KPIs de CRM -->
+          <div class="metrics-grid">
+            <div class="card-metric">
+              <span class="card-metric-label">Base de Clientes</span>
+              <span class="card-metric-value" id="crm-stat-total">0</span>
+              <span class="card-metric-trend text-light">Registrados na plataforma</span>
+            </div>
+            <div class="card-metric">
+              <span class="card-metric-label">Clientes Recorrentes</span>
+              <span class="card-metric-value text-green" id="crm-stat-recurrent">0</span>
+              <span class="card-metric-trend trend-up" id="crm-stat-recurrent-percent">0% fidelizados</span>
+            </div>
+            <div class="card-metric">
+              <span class="card-metric-label">Pontos de Fidelidade Ativos</span>
+              <span class="card-metric-value" id="crm-stat-points">0 pts</span>
+              <span class="card-metric-trend text-light">Emitidos nos pedidos</span>
+            </div>
+            <div class="card-metric">
+              <span class="card-metric-label">Gasto Médio por Cliente</span>
+              <span class="card-metric-value text-green" id="crm-stat-ltv">0,00 Kz</span>
+              <span class="card-metric-trend text-light">Lifetime Value estimado</span>
+            </div>
           </div>
+
+          <!-- Tabela de Clientes CRM -->
+          <div class="card mt-6">
+            <div class="card-header">
+              <h2 class="card-title">Diretório de Clientes</h2>
+              <span class="text-xs text-muted">Clique em um cliente para visualizar o histórico de pedidos</span>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Cliente</th>
+                      <th>Telefone / WhatsApp</th>
+                      <th>Total Pedidos</th>
+                      <th>Total Gasto</th>
+                      <th>Pontos</th>
+                      <th>Último Pedido</th>
+                      <th class="text-right">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="crm-table-tbody">
+                    <!-- Linhas preenchidas via user.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
         </section>
 
-        <!-- PAINEL 5: CUPONS & CAMPANHAS -->
+        <!-- ====================================================
+             PAINEL 6: CUPONS & CAMPANHAS PROMOCIONAIS
+             ==================================================== -->
         <section id="panel-coupons" class="tab-panel">
-          <div class="mb-4">
-            <h2 class="text-md font-bold">Cupons & Campanhas Promocionais</h2>
-            <p class="text-sm text-muted">Regras validadas estritamente no servidor.</p>
+          
+          <div class="d-flex justify-between items-center mb-6 flex-wrap gap-4">
+            <div>
+           </div>
+            <button type="button" class="btn btn-primary btn-sm" id="btn-open-coupon-modal">
+              <span data-icon="plus" data-icon-size="14"></span>
+              <span>Criar Cupom</span>
+            </button>
           </div>
 
-          <div class="tables-grid">
+          <!-- Grid de Cupons -->
+          <div class="tables-grid" id="coupons-cards-container">
+            <!-- Cards de cupons gerados dinamicamente via user.js -->
+          </div>
+
+        </section>
+
+        <!-- ====================================================
+             PAINEL 7: CONFIGURAÇÕES DO RESTAURANTE
+             ==================================================== -->
+        <section id="panel-settings" class="tab-panel">
+          
+          <div class="mb-6">
+          </div>
+
+          <div class="settings-grid">
             <div class="card">
               <div class="card-header">
-                <div>
-                  <span class="card-title">BEMVINDO10</span>
-                  <div class="card-subtitle">Cupom Percentual</div>
-                </div>
-                <span class="badge badge-ready">Ativo</span>
+                <h2 class="card-title">Perfil Comercial do Restaurante</h2>
               </div>
               <div class="card-body">
-                <div class="d-flex flex-col gap-1 text-xs">
-                  <div><strong>Desconto:</strong> 10%</div>
-                  <div><strong>Pedido Mínimo:</strong> 2.500,00 Kz</div>
-                  <div><strong>Desconto Máximo:</strong> 1.500,00 Kz</div>
-                  <div><strong>Limite por Cliente:</strong> 1 uso</div>
-                </div>
+                <form id="form-restaurant-settings" class="settings-form">
+                  <div class="form-group mb-4">
+                    <label class="form-label" for="setting-name">Nome do Restaurante</label>
+                    <input type="text" id="setting-name" class="form-input" value="Café Central">
+                  </div>
+                  <div class="form-group mb-4">
+                    <label class="form-label" for="setting-slug">Identificador / Slug URL</label>
+                    <input type="text" id="setting-slug" class="form-input" value="cafe-central" readonly>
+                    <p class="text-xs text-muted mt-1">Utilizado em: liq.ao/client/?restaurant=cafe-central</p>
+                  </div>
+                  <div class="form-row mb-4">
+                    <div class="form-group">
+                      <label class="form-label" for="setting-phone">Telefone / WhatsApp</label>
+                      <input type="text" id="setting-phone" class="form-input" value="+244 923 000 111">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="setting-email">E-mail Comercial</label>
+                      <input type="email" id="setting-email" class="form-input" value="contato@cafecentral.ao">
+                    </div>
+                  </div>
+                  <div class="form-group mb-4">
+                    <label class="form-label" for="setting-address">Endereço Completo</label>
+                    <input type="text" id="setting-address" class="form-input" value="Avenida 4 de Fevereiro, Luanda, Angola">
+                  </div>
+                  <div class="form-row mb-4">
+                    <div class="form-group">
+                      <label class="form-label" for="setting-currency">Moeda Padrão</label>
+                      <input type="text" id="setting-currency" class="form-input" value="Kz" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="setting-prep-time">Tempo Médio Estimado (min)</label>
+                      <input type="number" id="setting-prep-time" class="form-input" value="20">
+                    </div>
+                  </div>
+                  <div class="d-flex justify-end mt-4">
+                    <button type="submit" class="btn btn-primary" id="btn-save-settings">
+                      <span>Salvar Configurações</span>
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
 
+            <!-- Cartão de Informações do Plano e Suporte -->
             <div class="card">
               <div class="card-header">
-                <div>
-                  <span class="card-title">DESCONTO1000</span>
-                  <div class="card-subtitle">Cupom Valor Fixo</div>
-                </div>
-                <span class="badge badge-ready">Ativo</span>
+                <h2 class="card-title">Plano e Licenciamento</h2>
+                <span class="badge badge-ready">Pro Ilimitado</span>
               </div>
               <div class="card-body">
-                <div class="d-flex flex-col gap-1 text-xs">
-                  <div><strong>Desconto:</strong> 1.000,00 Kz</div>
-                  <div><strong>Pedido Mínimo:</strong> 5.000,00 Kz</div>
-                  <div><strong>Limite por Cliente:</strong> 1 uso</div>
+                <div class="plan-info-box">
+                  <p class="text-sm font-bold">LIQ SAAS Enterprise</p>
+                  <p class="text-xs text-muted mt-1">Autoatendimento por QR Code nas Mesas, Display KDS e CRM de Fidelização Ativos.</p>
+                  <div class="mt-4 pt-4 border-top">
+                    <p class="text-xs text-muted">Precisa de assistência técnica?</p>
+                    <a href="https://wa.me/244923000111?text=Ol%C3%A1%2C%20preciso%20de%20suporte%20no%20LIQ%20SAAS" target="_blank" class="btn btn-outline btn-sm mt-2 w-full">
+                      <span data-icon="whatsapp" data-icon-size="14"></span>
+                      <span>Falar com o Suporte Técnico</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
         </section>
 
       </main>
@@ -329,12 +614,436 @@
 
   </div>
 
-  <!-- Scripts Estruturados (Sem CSS interno nem inline) -->
+  <!-- ====================================================
+       3. MODAIS & DIÁLOGOS INTERATIVOS
+       ==================================================== -->
+
+  <!-- MODAL 1: DETALHES DA COMANDA / PEDIDO (KDS) -->
+  <div class="app-modal" id="modal-order-details" aria-hidden="true">
+    <div class="app-modal-backdrop" data-close-modal="modal-order-details"></div>
+    <div class="app-modal-dialog">
+      <div class="app-modal-header">
+        <div>
+          <h2 class="app-modal-title" id="order-modal-title">Comanda #000</h2>
+          <p class="app-modal-subtitle" id="order-modal-subtitle">Mesa -- &bull; Aberto há -- min</p>
+        </div>
+        <button type="button" class="app-modal-close" data-close-modal="modal-order-details" aria-label="Fechar">
+          <span data-icon="x" data-icon-size="18"></span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        
+        <div class="order-modal-customer-card mb-4" id="order-modal-customer-info">
+          <!-- Dados do cliente -->
+        </div>
+
+        <h3 class="text-xs font-bold text-muted uppercase tracking-wider mb-2">Itens Solicitados</h3>
+        <div class="order-modal-items-list mb-4" id="order-modal-items">
+          <!-- Lista de itens com snapshots -->
+        </div>
+
+        <div class="order-modal-financials" id="order-modal-financials">
+          <!-- Subtotal, Desconto e Total -->
+        </div>
+
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" id="btn-print-order">
+          <span data-icon="printer" data-icon-size="14"></span>
+          <span>Imprimir Comanda</span>
+        </button>
+        <div class="d-flex items-center gap-2" id="order-modal-actions">
+          <!-- Botões de avanço de estado dinâmicos -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: NOVO PEDIDO MANUAL -->
+  <div class="app-modal" id="modal-new-order" aria-hidden="true">
+    <div class="app-modal-backdrop" data-close-modal="modal-new-order"></div>
+    <div class="app-modal-dialog modal-dialog-lg">
+      <div class="app-modal-header">
+        <div>
+          <h2 class="app-modal-title">Novo Pedido Manual</h2>
+          <p class="app-modal-subtitle">Lance um pedido diretamente no balcão ou para uma mesa</p>
+        </div>
+        <button type="button" class="app-modal-close" data-close-modal="modal-new-order" aria-label="Fechar">
+          <span data-icon="x" data-icon-size="18"></span>
+        </button>
+      </div>
+      <form id="form-new-order">
+        <div class="app-modal-body">
+          <div class="form-row mb-4">
+            <div class="form-group">
+              <label class="form-label" for="manual-order-table">Mesa Destino *</label>
+              <select id="manual-order-table" class="form-select" required>
+                <!-- Preenchido via user.js -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="manual-order-customer-name">Nome do Cliente *</label>
+              <input type="text" id="manual-order-customer-name" class="form-input" placeholder="Ex: João Silva" required>
+            </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <label class="form-label">Adicionar Produtos ao Pedido</label>
+            <div class="manual-order-item-picker">
+              <select id="manual-order-product-select" class="form-select">
+                <!-- Preenchido via user.js -->
+              </select>
+              <input type="number" id="manual-order-qty" class="form-input w-24" value="1" min="1" max="50">
+              <button type="button" id="btn-add-item-to-manual-order" class="btn btn-secondary">
+                <span>Adicionar</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="manual-order-cart-table-wrapper mb-4">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Produto</th>
+                  <th>Qtd</th>
+                  <th>Preço Unit.</th>
+                  <th>Subtotal</th>
+                  <th class="w-12">Remover</th>
+                </tr>
+              </thead>
+              <tbody id="manual-order-items-tbody">
+                <tr>
+                  <td colspan="5" class="text-center text-muted text-xs py-4">Nenhum item adicionado ainda.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="d-flex justify-between items-center bg-gray-50 p-3 rounded">
+            <span class="font-bold">Total do Pedido:</span>
+            <span class="text-lg font-bold text-green" id="manual-order-total-val">0,00 Kz</span>
+          </div>
+
+          <div class="form-group mt-4">
+            <label class="form-label" for="manual-order-notes">Observações Gerais para a Cozinha</label>
+            <input type="text" id="manual-order-notes" class="form-input" placeholder="Ex: Sem cebola, gelo à parte...">
+          </div>
+        </div>
+        <div class="app-modal-footer">
+          <button type="button" class="btn btn-secondary" data-close-modal="modal-new-order">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit-manual-order">
+            <span>Enviar Pedido para a Cozinha</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 3: CADASTRAR NOVA MESA -->
+  <div class="app-modal" id="modal-table-form" aria-hidden="true">
+    <div class="app-modal-backdrop" data-close-modal="modal-table-form"></div>
+    <div class="app-modal-dialog">
+      <div class="app-modal-header">
+        <div>
+          <h2 class="app-modal-title">Cadastrar Nova Mesa</h2>
+          <p class="app-modal-subtitle">Gera identificador único e link de QR Code instantâneo</p>
+        </div>
+        <button type="button" class="app-modal-close" data-close-modal="modal-table-form" aria-label="Fechar">
+          <span data-icon="x" data-icon-size="18"></span>
+        </button>
+      </div>
+      <form id="form-new-table">
+        <div class="app-modal-body">
+          <div class="form-group mb-4">
+            <label class="form-label" for="table-input-number">Número da Mesa *</label>
+            <input type="text" id="table-input-number" class="form-input" placeholder="Ex: 08, 12, VIP-1" required>
+          </div>
+          <div class="form-group mb-4">
+            <label class="form-label" for="table-input-code">Código Interno (Opcional)</label>
+            <input type="text" id="table-input-code" class="form-input" placeholder="Ex: T08">
+            <p class="text-xs text-muted mt-1">Se vazio, será gerado automaticamente.</p>
+          </div>
+        </div>
+        <div class="app-modal-footer">
+          <button type="button" class="btn btn-secondary" data-close-modal="modal-table-form">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit-table">
+            <span>Salvar Mesa</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 4: VISUALIZAR / IMPRIMIR QR CODE DA MESA -->
+  <div class="app-modal" id="modal-qr-preview" aria-hidden="true">
+    <div class="app-modal-backdrop" data-close-modal="modal-qr-preview"></div>
+    <div class="app-modal-dialog">
+      <div class="app-modal-header">
+        <div>
+          <h2 class="app-modal-title" id="qr-modal-title">Totem Mesa --</h2>
+          <p class="app-modal-subtitle">Acesso Digital do Cliente por QR Code ou NFC</p>
+        </div>
+        <button type="button" class="app-modal-close" data-close-modal="modal-qr-preview" aria-label="Fechar">
+          <span data-icon="x" data-icon-size="18"></span>
+        </button>
+      </div>
+      <div class="app-modal-body text-center">
+        <!-- Modo de Conectividade / Host -->
+        <div class="qr-host-selector-row">
+          <label class="text-xs text-muted" for="qr-host-mode-select">Ambiente / Acesso:</label>
+          <select id="qr-host-mode-select" class="qr-host-select">
+            <option value="WIFI" selected>Wi-Fi / Telemóvel (192.168.100.11)</option>
+            <option value="LOCALHOST">Localhost (Navegador do PC)</option>
+            <option value="PROD">Produção Oficial (app.liq.ao)</option>
+          </select>
+        </div>
+
+        <div class="qr-print-card" id="qr-printable-area">
+          <div class="qr-brand-logo mb-2">
+            <img src="../assets/images/logo.png" alt="LIQ SAAS" class="h-8">
+          </div>
+          <h3 class="qr-card-table-title" id="qr-card-table-text">Mesa 07</h3>
+          <p class="qr-card-instruction">Aponte a câmera do seu telemóvel para visualizar o cardápio e fazer pedidos:</p>
+          
+          <div class="qr-svg-wrapper my-4" id="qr-code-svg-render">
+            <!-- QR Code real e escaneável gerado via QRCodeGenerator -->
+          </div>
+
+          <div class="qr-url-badge" id="qr-card-url-text">liq.ao/client/?t=07</div>
+        </div>
+
+        <!-- Ações Rápidas -->
+        <div class="d-flex justify-center gap-2 mt-3">
+          <button type="button" class="btn btn-outline btn-xs" id="btn-copy-qr-url">
+            <span data-icon="copy" data-icon-size="12"></span>
+            <span>Copiar Link</span>
+          </button>
+          <a id="btn-open-qr-url" href="#" target="_blank" class="btn btn-outline btn-xs">
+            <span data-icon="external" data-icon-size="12"></span>
+            <span>Testar no Navegador</span>
+          </a>
+        </div>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-close-modal="modal-qr-preview">Fechar</button>
+        <button type="button" class="btn btn-primary" id="btn-print-qr-code">
+          <span data-icon="printer" data-icon-size="14"></span>
+          <span>Imprimir Totem da Mesa</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 5: NOVO PRODUTO -->
+  <div class="app-modal" id="modal-product-form" aria-hidden="true">
+    <div class="app-modal-backdrop" data-close-modal="modal-product-form"></div>
+    <div class="app-modal-dialog">
+      <div class="app-modal-header">
+        <div>
+          <h2 class="app-modal-title">Adicionar Novo Produto</h2>
+          <p class="app-modal-subtitle">Disponibilize um novo item para pedidos no cardápio digital</p>
+        </div>
+        <button type="button" class="app-modal-close" data-close-modal="modal-product-form" aria-label="Fechar">
+          <span data-icon="x" data-icon-size="18"></span>
+        </button>
+      </div>
+      <form id="form-new-product">
+        <div class="app-modal-body">
+          <div class="form-group mb-4">
+            <label class="form-label" for="product-name">Nome do Produto *</label>
+            <input type="text" id="product-name" class="form-input" placeholder="Ex: Bife à Portuguesa" required>
+          </div>
+          <div class="form-row mb-4">
+            <div class="form-group">
+              <label class="form-label" for="product-category">Categoria *</label>
+              <select id="product-category" class="form-select" required>
+                <!-- Preenchido via user.js -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="product-price">Preço (Kz) *</label>
+              <input type="number" id="product-price" class="form-input" placeholder="Ex: 4500" step="50" min="50" required>
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <label class="form-label" for="product-description">Descrição dos Ingredientes / Prato</label>
+            <textarea id="product-description" class="form-textarea" rows="2" placeholder="Ex: Carne bovina grelhada acompanhada de batata frita e ovo a cavalo..."></textarea>
+          </div>
+          <div class="form-group mb-4">
+            <label class="form-label">Fotografia do Prato / Produto</label>
+            <div class="product-file-upload-box" id="product-file-dropzone">
+              <input type="file" id="product-file-input" class="product-file-input-hidden" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml">
+              <div class="product-file-preview-wrap">
+                <img id="product-file-preview-img" src="../assets/images/default-product.svg" alt="Pré-visualização" class="product-file-preview-thumb" onerror="this.onerror=null; this.src='../assets/images/default-product.svg';">
+                <div class="product-file-info">
+                  <p class="product-file-title" id="product-file-name-label">Clique para carregar uma imagem</p>
+                  <p class="product-file-subtitle">Formatos aceitos: JPG, PNG, WEBP (até 5MB)</p>
+                </div>
+              </div>
+              <button type="button" class="btn btn-outline btn-xs" id="btn-trigger-file-browser">
+                <span data-icon="download" data-icon-size="12"></span>
+                <span>Escolher Ficheiro</span>
+              </button>
+            </div>
+            <input type="hidden" id="product-uploaded-path" value="">
+          </div>
+        </div>
+        <div class="app-modal-footer">
+          <button type="button" class="btn btn-secondary" data-close-modal="modal-product-form">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit-product">
+            <span>Salvar Produto</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 6: NOVA CATEGORIA -->
+  <div class="app-modal" id="modal-category-form" aria-hidden="true">
+    <div class="app-modal-backdrop" data-close-modal="modal-category-form"></div>
+    <div class="app-modal-dialog">
+      <div class="app-modal-header">
+        <div>
+          <h2 class="app-modal-title">Cadastrar Categoria</h2>
+          <p class="app-modal-subtitle">Organize os grupos do cardápio digital</p>
+        </div>
+        <button type="button" class="app-modal-close" data-close-modal="modal-category-form" aria-label="Fechar">
+          <span data-icon="x" data-icon-size="18"></span>
+        </button>
+      </div>
+      <form id="form-new-category">
+        <div class="app-modal-body">
+          <div class="form-group mb-4">
+            <label class="form-label" for="category-name">Nome da Categoria *</label>
+            <input type="text" id="category-name" class="form-input" placeholder="Ex: Entradas & Petiscos" required>
+          </div>
+        </div>
+        <div class="app-modal-footer">
+          <button type="button" class="btn btn-secondary" data-close-modal="modal-category-form">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit-category">
+            <span>Salvar Categoria</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 7: NOVO CUPOM PROMOCIONAL -->
+  <div class="app-modal" id="modal-coupon-form" aria-hidden="true">
+    <div class="app-modal-backdrop" data-close-modal="modal-coupon-form"></div>
+    <div class="app-modal-dialog">
+      <div class="app-modal-header">
+        <div>
+          <h2 class="app-modal-title">Criar Cupom de Desconto</h2>
+          <p class="app-modal-subtitle">Regras validadas com 100% de segurança no servidor</p>
+        </div>
+        <button type="button" class="app-modal-close" data-close-modal="modal-coupon-form" aria-label="Fechar">
+          <span data-icon="x" data-icon-size="18"></span>
+        </button>
+      </div>
+      <form id="form-new-coupon">
+        <div class="app-modal-body">
+          <div class="form-row mb-4">
+            <div class="form-group">
+              <label class="form-label" for="coupon-code">Código do Cupom *</label>
+              <input type="text" id="coupon-code" class="form-input uppercase-input" placeholder="Ex: VERÃO15" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="coupon-type">Tipo de Desconto *</label>
+              <select id="coupon-type" class="form-select" required>
+                <option value="PERCENTAGE">Percentual (%)</option>
+                <option value="FIXED">Valor Fixo (Kz)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row mb-4">
+            <div class="form-group">
+              <label class="form-label" for="coupon-value">Valor do Desconto *</label>
+              <input type="number" id="coupon-value" class="form-input" placeholder="Ex: 10 ou 1000" min="1" step="0.5" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="coupon-min-order">Pedido Mínimo (Kz)</label>
+              <input type="number" id="coupon-min-order" class="form-input" placeholder="Ex: 2500" value="0">
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <label class="form-label" for="coupon-max-discount">Desconto Máximo Teto (Kz) (Opcional)</label>
+            <input type="number" id="coupon-max-discount" class="form-input" placeholder="Ex: 2000">
+          </div>
+        </div>
+        <div class="app-modal-footer">
+          <button type="button" class="btn btn-secondary" data-close-modal="modal-coupon-form">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit-coupon">
+            <span>Publicar Cupom</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 8: DETALHES DO CLIENTE CRM -->
+  <div class="app-modal" id="modal-customer-details" aria-hidden="true">
+    <div class="app-modal-backdrop" data-close-modal="modal-customer-details"></div>
+    <div class="app-modal-dialog">
+      <div class="app-modal-header">
+        <div>
+          <h2 class="app-modal-title" id="crm-modal-customer-name">Cliente --</h2>
+          <p class="app-modal-subtitle" id="crm-modal-customer-phone">+244 --</p>
+        </div>
+        <button type="button" class="app-modal-close" data-close-modal="modal-customer-details" aria-label="Fechar">
+          <span data-icon="x" data-icon-size="18"></span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <div class="crm-modal-points-box mb-4">
+          <div class="d-flex items-center gap-2">
+            <span class="text-xs font-bold text-muted uppercase">Saldo de Fidelidade:</span>
+            <span class="text-lg font-bold text-green" id="crm-modal-points">0 pts</span>
+          </div>
+          <a href="#" target="_blank" id="crm-modal-wa-link" class="btn btn-outline btn-xs">
+            <span data-icon="whatsapp" data-icon-size="14"></span>
+            <span>Mensagem WhatsApp</span>
+          </a>
+        </div>
+
+        <h3 class="text-xs font-bold text-muted uppercase tracking-wider mb-2">Histórico de Pedidos</h3>
+        <div class="crm-modal-orders-list" id="crm-modal-orders-list">
+          <!-- Lista de pedidos do cliente -->
+        </div>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-close-modal="modal-customer-details">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIÁLOGO UNIVERSAL DE CONFIRMAÇÃO -->
+  <div class="app-modal" id="modal-confirm-dialog" aria-hidden="true">
+    <div class="app-modal-backdrop" data-close-modal="modal-confirm-dialog"></div>
+    <div class="app-modal-dialog modal-dialog-sm">
+      <div class="app-modal-header">
+        <h2 class="app-modal-title" id="confirm-dialog-title">Confirmar Ação</h2>
+        <button type="button" class="app-modal-close" data-close-modal="modal-confirm-dialog" aria-label="Fechar">
+          <span data-icon="x" data-icon-size="18"></span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <p class="text-sm" id="confirm-dialog-message">Tem certeza que deseja executar esta ação?</p>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-close-modal="modal-confirm-dialog">Cancelar</button>
+        <button type="button" class="btn btn-primary btn-sm" id="btn-confirm-dialog-action">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts Oficiais -->
   <script src="../assets/script/icons.js"></script>
   <script src="../utils/function/useAlert.js"></script>
   <script src="../utils/functions/useFormatters.js"></script>
   <script src="../utils/functions/useApi.js"></script>
   <script src="../utils/functions/usePanels.js"></script>
+  <script src="../assets/script/qrcode.js"></script>
   <script src="../assets/script/user.js"></script>
 </body>
 </html>

@@ -169,7 +169,7 @@ const ClientApp = {
       html += `
         <div class="menu-card" data-product-id="${item.id}">
           <div class="menu-card-thumb">
-            ${AppIcons.render(item.type === 'DISH' ? 'products' : 'orders', 28)}
+            <img src="${useFormatters.productImage(item.image)}" alt="${useFormatters.escapeHtml(item.name)}" class="menu-card-img" onerror="this.onerror=null; this.src='../assets/images/default-product.svg';">
           </div>
           <div class="menu-card-content">
             <div>

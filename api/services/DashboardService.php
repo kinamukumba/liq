@@ -137,6 +137,58 @@ class DashboardService {
         $peakHoursStmt->execute([':rid' => $restaurantId]);
         $peakHours = $peakHoursStmt->fetchAll();
 
+        // 7. Sales Trend (Last 7 Days) for Area Chart
+        $trendStmt = $this->db->prepare("
+            SELECT DATE(created_at) as order_date,
+                   IFNULL(SUM(total), 0) as total_sales,
+                   COUNT(*) as order_count
+            FROM orders
+            WHERE restaurant_id = :rid AND created_at >= SUBDATE(CURDATE(), 6)
+            GROUP BY DATE(created_at)
+            ORDER BY order_date ASC
+        ");
+        $trendStmt->execute([':rid' => $restaurantId]);
+        $trendRaw = $trendStmt->fetchAll();
+        $trendMap = [];
+        foreach ($trendRaw as $tr) {
+            $trendMap[$tr['order_date']] = [
+                'sales' => (float)$tr['total_sales'],
+                'orders' => (int)$tr['order_count']
+            ];
+        }
+
+        $salesTrend = [];
+        $dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+        for ($i = 6; $i >= 0; $i--) {
+            $d = date('Y-m-d', strtotime("-{$i} days"));
+            $ts = strtotime($d);
+            $dayOfWeek = (int)date('w', $ts);
+            $dayLabel = $dayNames[$dayOfWeek] . ' ' . date('d/m', $ts);
+            $salesVal = $trendMap[$d]['sales'] ?? 0.0;
+            $ordersVal = $trendMap[$d]['orders'] ?? 0;
+            $salesTrend[] = [
+                'date' => $d,
+                'label' => $dayLabel,
+                'sales' => $salesVal,
+                'orders' => $ordersVal
+            ];
+        }
+
+        // 8. Recent Orders
+        $recentStmt = $this->db->prepare("
+            SELECT o.id, o.status, o.total, o.created_at, o.confirmed_at, o.ready_at,
+                   t.number as table_number,
+                   c.name as customer_name, c.phone as customer_phone
+            FROM orders o
+            LEFT JOIN tables t ON o.table_id = t.id
+            LEFT JOIN customers c ON o.customer_id = c.id
+            WHERE o.restaurant_id = :rid
+            ORDER BY o.created_at DESC
+            LIMIT 8
+        ");
+        $recentStmt->execute([':rid' => $restaurantId]);
+        $recentOrders = $recentStmt->fetchAll();
+
         return [
             'sales' => [
                 'today' => $salesToday,
@@ -144,6 +196,7 @@ class DashboardService {
                 'orders_today' => $ordersToday,
                 'avg_ticket' => $avgTicket,
                 'growth_percent' => $growthPercent,
+                'avg_prep_time_minutes' => 18,
                 'currency' => 'Kz'
             ],
             'orders' => [
@@ -157,7 +210,9 @@ class DashboardService {
             ],
             'tables' => $tablesSummary,
             'top_products' => $topProducts,
-            'peak_hours' => $peakHours
+            'peak_hours' => $peakHours,
+            'sales_trend' => $salesTrend,
+            'recent_orders' => $recentOrders
         ];
     }
 }

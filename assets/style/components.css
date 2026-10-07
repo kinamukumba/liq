@@ -1,9 +1,20 @@
 /**
  * ====================================================================
  * LIQ SAAS - COMPONENTS STYLESHEET (components.css)
- * Componentes padronizados: Botões, Inputs, Cards, Badges, Modais, Tabelas
+ * Componentes padronizados: Botões, Inputs, Cards, Badges, Modais, Tabelas, Tab Panels
  * ====================================================================
  */
+
+/* ----------------------------------------------------
+   0. PAINÉIS / ABAS (Tab Panels)
+   ---------------------------------------------------- */
+.tab-panel {
+  display: none !important;
+}
+
+.tab-panel.active {
+  display: block !important;
+}
 
 /* ----------------------------------------------------
    1. BOTÕES (Buttons)
@@ -61,7 +72,7 @@
 .btn-primary {
   background-color: var(--color-primary); /* #149036 */
   color: #ffffff !important;
-  border: 1px solid var(--color-border-dark); /* #024d10 */
+  border: 1px solid transparent;
   box-shadow: 0 1px 3px rgba(2, 77, 16, 0.25);
   cursor: pointer;
   position: relative;
@@ -71,7 +82,7 @@
 /* 1. Estado Hover */
 .btn-primary:hover:not(:disabled):not(.is-loading) {
   background-color: var(--color-primary-hover); /* #024d10 */
-  border-color: #012b08;
+  border-color: transparent;
   color: #ffffff !important;
   box-shadow: 0 3px 6px rgba(2, 77, 16, 0.3);
   transform: translateY(-1px);
@@ -80,7 +91,7 @@
 /* 2. Estado Active / Clicado */
 .btn-primary:active:not(:disabled):not(.is-loading) {
   background-color: var(--color-primary-active); /* #012b08 */
-  border-color: #012b08;
+  border-color: transparent;
   color: #ffffff !important;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35);
   transform: translateY(0);
@@ -375,55 +386,55 @@
 .badge-pending {
   background-color: #fef3c7;
   color: #92400e;
-  border-color: #fde68a;
+  border: 1px solid transparent;
 }
 
 .badge-confirmed {
   background-color: #e0e7ff;
   color: #3730a3;
-  border-color: #c7d2fe;
+  border: 1px solid transparent;
 }
 
 .badge-preparing {
   background-color: #e0f2fe;
   color: #0369a1;
-  border-color: #bae6fd;
+  border: 1px solid transparent;
 }
 
 .badge-ready {
   background-color: var(--color-bg-subtle);
-  color: var(--color-border-dark);
-  border-color: var(--color-border-strong);
+  color: #065f46;
+  border: 1px solid transparent;
 }
 
 .badge-delivering {
   background-color: #f3e8ff;
   color: #6b21a8;
-  border-color: #e9d5ff;
+  border: 1px solid transparent;
 }
 
 .badge-completed {
   background-color: #ecfdf5;
   color: #065f46;
-  border-color: #a7f3d0;
+  border: 1px solid transparent;
 }
 
 .badge-cancelled {
   background-color: #fef2f2;
   color: #991b1b;
-  border-color: #fecaca;
+  border: 1px solid transparent;
 }
 
 .badge-available {
   background-color: #ecfdf5;
   color: #065f46;
-  border-color: #a7f3d0;
+  border: 1px solid transparent;
 }
 
 .badge-occupied {
   background-color: #fee2e2;
   color: #991b1b;
-  border-color: #fca5a5;
+  border: 1px solid transparent;
 }
 
 /* ----------------------------------------------------

@@ -86,6 +86,14 @@ const useApi = {
     });
   },
 
+  async postFormData(endpoint, formData, headers = {}) {
+    return this.request(endpoint, {
+      method: 'POST',
+      headers,
+      body: formData
+    });
+  },
+
   async patch(endpoint, data = {}, headers = {}) {
     return this.request(endpoint, {
       method: 'PATCH',

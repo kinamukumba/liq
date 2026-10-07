@@ -69,6 +69,14 @@ class Request {
         return $this->body;
     }
 
+    public function file(string $key): ?array {
+        return $_FILES[$key] ?? null;
+    }
+
+    public function files(): array {
+        return $_FILES;
+    }
+
     public function cookie(string $name, ?string $default = null): ?string {
         return $this->cookies[$name] ?? $default;
     }

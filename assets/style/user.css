@@ -1,9 +1,23 @@
 /**
  * ====================================================================
  * LIQ SAAS - RESTAURANT USER DASHBOARD STYLES (user.css)
- * Layout da área restrita do restaurante, KDS, Mesas e CRM
+ * Estilização completa da área restrita do restaurante
+ * Painéis, Gráficos SVG Nativos, KDS de Cozinha, Mesas, CRM e Modais
  * ====================================================================
  */
+
+/* ----------------------------------------------------
+   1. LAYOUT PRINCIPAL & RESET DE ÁREA
+   ---------------------------------------------------- */
+.dashboard-body {
+  margin: 0;
+  padding: 0;
+  background-color: #f7faf8;
+  color: var(--color-text-main);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 
 .app-layout {
   display: flex;
@@ -11,19 +25,25 @@
   width: 100%;
 }
 
-/* Sidebar */
+/* ----------------------------------------------------
+   2. SIDEBAR OFICIAL (Dark Forest)
+   ---------------------------------------------------- */
 .app-sidebar {
-  width: 250px;
+  width: 260px;
   background-color: var(--color-bg-dark);
   color: var(--color-text-white);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 100;
 }
 
 .app-sidebar-header {
-  height: 64px;
+  height: 68px;
   padding: 0 var(--space-5);
   display: flex;
   align-items: center;
@@ -37,14 +57,22 @@
   gap: var(--space-2);
 }
 
+.brand-logo-img {
+  height: 30px;
+  width: auto;
+  display: block;
+}
+
 .sidebar-brand-tag {
-  background-color: var(--color-accent);
-  color: var(--color-text-main);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
-  padding: 2px 6px;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--c-neon-green);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
   border-radius: var(--radius-sm);
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .app-sidebar-nav {
@@ -53,49 +81,71 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: 3px;
 }
 
 .nav-section-title {
-  font-size: 0.6875rem;
-  font-weight: var(--font-weight-bold);
+  font-size: 11px;
+  font-weight: 700;
   color: #79977e;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: var(--space-3) var(--space-3) var(--space-1);
+  letter-spacing: 0.07em;
+  padding: var(--space-4) var(--space-3) var(--space-1);
 }
 
 .nav-link {
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  padding: var(--space-2) var(--space-3);
+  padding: 10px var(--space-3);
   border-radius: var(--radius-md);
   color: #c0d4c4;
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  font-weight: 600;
   cursor: pointer;
   border: none;
   background: transparent;
   width: 100%;
   text-align: left;
   transition: all var(--transition-fast);
+  position: relative;
 }
 
 .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgba(255, 255, 255, 0.07);
   color: #ffffff;
 }
 
 .nav-link.active {
   background-color: var(--color-primary);
   color: #ffffff;
+  box-shadow: 0 4px 12px rgba(20, 144, 54, 0.35);
 }
 
 .nav-link .nav-icon {
-  width: 18px;
-  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+}
+
+.nav-counter-badge {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.nav-link.active .nav-counter-badge {
+  background-color: #ffffff;
+  color: var(--color-primary);
+}
+
+.nav-counter-badge.badge-tables {
+  background-color: rgba(20, 144, 54, 0.4);
 }
 
 .app-sidebar-footer {
@@ -113,8 +163,8 @@
 }
 
 .user-avatar-initials {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: var(--radius-full);
   background-color: var(--color-accent);
   color: var(--color-text-main);
@@ -123,53 +173,90 @@
   justify-content: center;
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-xs);
+  flex-shrink: 0;
 }
 
 .user-details {
   flex: 1;
-  overflow: hidden;
+  min-width: 0;
 }
 
 .user-name {
   font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: #ffffff;
+}
+
+.user-role {
+  font-size: 11px;
+  color: #79977e;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.user-role {
-  font-size: 0.6875rem;
-  color: #8da492;
+.sidebar-logout-btn {
+  background: transparent;
+  border: none;
+  color: #79977e;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 150ms ease;
 }
 
-/* Área Principal */
+.sidebar-logout-btn:hover {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+/* ----------------------------------------------------
+   3. ÁREA PRINCIPAL & CABEÇALHO SUPERIOR
+   ---------------------------------------------------- */
 .app-main {
   flex: 1;
   display: flex;
   flex-direction: column;
   min-width: 0;
-  background-color: var(--color-bg-app);
+  background-color: #f7faf8;
 }
 
 .app-header {
-  height: 64px;
-  background-color: var(--color-bg-surface);
-  border-bottom: 1px solid var(--color-border-subtle);
+  height: 68px;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--color-border);
   padding: 0 var(--space-6);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  box-shadow: 0 1px 3px rgba(3, 34, 4, 0.04);
 }
 
 .header-title-group h1 {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-bold);
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--c-dark-forest);
 }
 
-.header-title-group p {
-  font-size: var(--font-size-xs);
+.header-badge-status {
+  margin-left: 8px;
+  font-size: 11px;
+}
+
+.header-subtitle {
+  font-size: 12px;
+  color: var(--color-text-light);
+  margin: 2px 0 0;
 }
 
 .header-actions {
@@ -179,31 +266,374 @@
 }
 
 .app-content {
-  flex: 1;
   padding: var(--space-6);
-  overflow-y: auto;
+  flex: 1;
 }
 
-/* Painéis de Abas (Tab Panels) */
+/* ----------------------------------------------------
+   3.1. CHAVEAMENTO DE PAINÉIS (TAB PANELS)
+   ---------------------------------------------------- */
 .tab-panel {
-  display: none;
+  display: none !important;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .tab-panel.active {
-  display: block;
+  display: block !important;
+  opacity: 1;
+  visibility: visible;
+  animation: panelFadeIn 180ms ease forwards;
 }
 
-/* Grids do Dashboard */
+@keyframes panelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ----------------------------------------------------
+   4. FILTRO DE PERÍODO & KPIS DO DASHBOARD
+   ---------------------------------------------------- */
+.dashboard-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+  background-color: #ffffff;
+  padding: 10px 16px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+}
+
+.filter-period-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-light);
+  margin-right: 4px;
+}
+
+.filter-period-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-light);
+  cursor: pointer;
+  transition: all 140ms ease;
+}
+
+.filter-period-btn:hover {
+  background-color: #f1f6f2;
+  color: var(--color-primary);
+}
+
+.filter-period-btn.active {
+  background-color: var(--c-mint-light);
+  border-color: transparent;
+  color: var(--color-primary);
+}
+
+.dashboard-live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pulse-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--c-leaf-green);
+  box-shadow: 0 0 0 rgba(38, 205, 89, 0.4);
+  animation: pulseGreen 2s infinite;
+}
+
+@keyframes pulseGreen {
+  0% { box-shadow: 0 0 0 0 rgba(38, 205, 89, 0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(38, 205, 89, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(38, 205, 89, 0); }
+}
+
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-4);
   margin-bottom: var(--space-6);
 }
 
+@media (max-width: 1024px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card-metric {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(3, 34, 4, 0.03);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.card-metric:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(3, 34, 4, 0.06);
+}
+
+.card-metric-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.card-metric-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+.card-metric-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
+.bg-mint {
+  background-color: var(--c-mint-light);
+}
+
+.card-metric-value {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--c-dark-forest);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.card-metric-value.text-green {
+  color: var(--color-primary);
+}
+
+.card-metric-trend {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.trend-up {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.trend-down {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.trend-neutral {
+  color: var(--color-text-light);
+}
+
+/* ----------------------------------------------------
+   5. GRÁFICOS SVG NATIVOS (ÁREA & DONUT)
+   ---------------------------------------------------- */
+.charts-main-grid {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+@media (max-width: 1024px) {
+  .charts-main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chart-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--c-mint-light);
+  color: var(--color-primary);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.chart-container {
+  width: 100%;
+  height: 250px;
+  position: relative;
+}
+
+.chart-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.chart-grid-line {
+  stroke: #e7efe9;
+  stroke-dasharray: 4, 4;
+  stroke-width: 1;
+}
+
+.chart-axis-text {
+  font-size: 11px;
+  fill: #7b9680;
+  font-family: var(--font-sans);
+}
+
+.chart-area-path {
+  fill: url(#salesGradient);
+}
+
+.chart-line-path {
+  fill: none;
+  stroke: var(--c-emerald);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chart-point {
+  fill: #ffffff;
+  stroke: var(--c-emerald);
+  stroke-width: 3;
+  cursor: pointer;
+  transition: r 150ms ease, stroke-width 150ms ease;
+}
+
+.chart-point:hover {
+  r: 7;
+  stroke: var(--c-neon-green);
+  stroke-width: 4;
+}
+
+/* Donut Chart */
+.donut-chart-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 180px;
+  position: relative;
+}
+
+.donut-svg {
+  width: 160px;
+  height: 160px;
+  transform: rotate(-90deg);
+}
+
+.donut-segment {
+  fill: transparent;
+  stroke-width: 24;
+  transition: stroke-width 200ms ease;
+  cursor: pointer;
+}
+
+.donut-segment:hover {
+  stroke-width: 28;
+}
+
+.donut-center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.donut-center-val {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--c-dark-forest);
+  line-height: 1;
+}
+
+.donut-center-lbl {
+  font-size: 11px;
+  color: var(--color-text-light);
+  margin-top: 4px;
+}
+
+.status-legend-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-item-name {
+  color: var(--color-text-main);
+  flex: 1;
+}
+
+.legend-item-count {
+  font-weight: 700;
+  color: var(--c-dark-forest);
+}
+
+/* ----------------------------------------------------
+   6. RANKING DE PRODUTOS & HORÁRIOS DE PICO
+   ---------------------------------------------------- */
 .dashboard-split-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-6);
 }
 
@@ -213,94 +643,835 @@
   }
 }
 
-/* Ranking de Produtos */
-.product-rank-row {
-  margin-bottom: var(--space-3);
+.header-icon-pill {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background-color: var(--c-mint-light);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.product-rank-meta {
+.top-product-item {
   display: flex;
-  justify-content: space-between;
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.top-product-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.top-product-rank {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #f1f6f2;
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.top-product-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.top-product-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-dark-forest);
   margin-bottom: 4px;
 }
 
-.product-rank-bar-bg {
+.top-product-progress-bg {
   width: 100%;
   height: 6px;
-  background-color: var(--color-bg-subtle);
-  border-radius: var(--radius-full);
+  background-color: #e9f2eb;
+  border-radius: 3px;
   overflow: hidden;
 }
 
-.product-rank-bar-fill {
+.top-product-progress-fill {
   height: 100%;
   background-color: var(--color-primary);
-  border-radius: var(--radius-full);
+  border-radius: 3px;
 }
 
-/* Gráfico de Horários de Pico */
-.peak-hour-row {
+.top-product-stat {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.top-product-qty {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--c-dark-forest);
+}
+
+.top-product-rev {
+  font-size: 11px;
+  color: var(--color-text-light);
+}
+
+/* Gráfico de Horários de Pico (Barras SVG) */
+.peak-hours-svg {
+  width: 100%;
+  height: 200px;
+}
+
+.bar-rect {
+  fill: rgba(38, 205, 89, 0.45);
+  rx: 3;
+  ry: 3;
+  transition: fill 150ms ease;
+  cursor: pointer;
+}
+
+.bar-rect:hover {
+  fill: var(--color-primary);
+}
+
+.bar-label {
+  font-size: 10px;
+  fill: #7b9680;
+  text-anchor: middle;
+}
+
+/* ----------------------------------------------------
+   7. QUADRO KDS DA COZINHA (PEDIDOS AO VIVO)
+   ---------------------------------------------------- */
+.kds-top-bar {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  font-size: var(--font-size-xs);
-  margin-bottom: 6px;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+  flex-wrap: gap;
+  gap: 16px;
 }
 
-.peak-hour-label {
-  width: 32px;
-  font-family: var(--font-mono);
-  color: var(--color-text-muted);
-}
-
-.peak-hour-bar-bg {
-  flex: 1;
-  height: 14px;
-  background-color: var(--color-bg-subtle);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
+.kds-filter-tabs {
   display: flex;
+  background-color: #ffffff;
+  padding: 4px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  gap: 4px;
 }
 
-.peak-hour-bar-fill {
-  height: 100%;
+.kds-tab-btn {
+  background: transparent;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-light);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 140ms ease;
+}
+
+.kds-tab-btn:hover {
+  background-color: #f1f6f2;
+  color: var(--color-primary);
+}
+
+.kds-tab-btn.active {
   background-color: var(--color-primary);
-  border-radius: var(--radius-sm);
+  color: #ffffff;
 }
 
-.peak-hour-count {
-  width: 24px;
-  text-align: right;
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-main);
+.kds-tab-count {
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.08);
 }
 
-/* KDS Kitchen Grid */
+.kds-tab-btn.active .kds-tab-count {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
 .kds-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
   gap: var(--space-4);
 }
 
 .kds-card {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 14px rgba(3, 34, 4, 0.04);
+  transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.kds-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(3, 34, 4, 0.08);
+}
+
+.kds-card.status-pending,
+.kds-card.status-confirmed,
+.kds-card.status-preparing,
+.kds-card.status-ready {
+  border-left: 1px solid var(--color-border);
+}
+
+.kds-card-header {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
   justify-content: space-between;
+}
+
+.kds-card-table-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--c-dark-forest);
+  margin: 0;
+}
+
+.kds-card-customer-sub {
+  font-size: 12px;
+  color: var(--color-text-light);
+  margin-top: 2px;
+}
+
+.kds-timer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  background-color: #f1f6f2;
+  color: var(--c-dark-forest);
+}
+
+.kds-timer-badge.timer-warning {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.kds-timer-badge.timer-danger {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  animation: pulseDanger 1.5s infinite;
+}
+
+@keyframes pulseDanger {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.kds-card-body {
+  padding: var(--space-4);
+  flex: 1;
+}
+
+.kds-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .kds-item-row {
   display: flex;
-  justify-content: space-between;
-  font-size: var(--font-size-xs);
-  padding: 4px 0;
-  border-bottom: 1px dashed var(--color-border-subtle);
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
 }
 
-/* Mesas Grid */
+.kds-item-qty {
+  font-weight: 700;
+  color: var(--color-primary);
+  background-color: var(--c-mint-light);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.kds-item-name {
+  font-weight: 600;
+  color: var(--c-dark-forest);
+  flex: 1;
+}
+
+.kds-item-notes {
+  font-size: 11px;
+  color: #b45309;
+  background-color: #fffbeb;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 2px;
+  display: inline-block;
+}
+
+.kds-card-footer {
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--color-border);
+  background-color: #fafcfb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* ----------------------------------------------------
+   8. GESTÃO DE MESAS
+   ---------------------------------------------------- */
+.tables-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+
+@media (max-width: 768px) {
+  .tables-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.table-stat-card {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  text-align: center;
+}
+
+.table-stat-card.border-green,
+.table-stat-card.border-orange,
+.table-stat-card.border-gray {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.table-stat-val {
+  font-size: 24px;
+  font-weight: 700;
+  display: block;
+}
+
+.table-stat-lbl {
+  font-size: 12px;
+  color: var(--color-text-light);
+  font-weight: 600;
+}
+
 .tables-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: var(--space-4);
+  margin-top: 5%;
+}
+
+.table-card {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(3, 34, 4, 0.03);
+  display: flex;
+  flex-direction: column;
+}
+
+.table-card-header {
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.table-card-number {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--c-dark-forest);
+  margin: 0;
+}
+
+.table-card-code {
+  font-size: 11px;
+  color: var(--color-text-light);
+}
+
+.table-card-body {
+  padding: var(--space-4);
+  flex: 1;
+}
+
+.table-active-order-box {
+  background-color: #f1f6f2;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.table-card-footer {
+  padding: var(--space-3) var(--space-4);
+  background-color: #fafcfb;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ----------------------------------------------------
+   9. CARDÁPIO & PRODUTOS
+   ---------------------------------------------------- */
+.menu-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.menu-search-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.search-input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-light);
+  pointer-events: none;
+}
+
+.search-input {
+  padding-left: 36px;
+}
+
+.menu-category-select-wrapper {
+  width: 220px;
+}
+
+.product-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  object-fit: cover;
+  background-color: #f8fafc;
+  border: 1px solid var(--color-border);
+}
+
+/* File Upload Picker do Produto */
+.product-file-upload-box {
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  background-color: #fafcfb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.product-file-upload-box:hover {
+  border-color: var(--color-text-light);
+  background-color: #f1f6f2;
+}
+
+.product-file-input-hidden {
+  display: none !important;
+}
+
+.product-file-preview-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 1;
+  min-width: 0;
+}
+
+.product-file-preview-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+  background-color: #ffffff;
+  flex-shrink: 0;
+}
+
+.product-file-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.product-file-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-file-subtitle {
+  font-size: 11px;
+  color: var(--color-text-light);
+  margin: 2px 0 0;
+}
+
+/* QR Host Mode Switcher */
+.qr-host-selector-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: var(--space-3);
+}
+
+.qr-host-select {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background-color: #ffffff;
+  color: var(--color-text-main);
+  outline: none;
+}
+
+
+/* Switch Toggle de Disponibilidade */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #d1d5db;
+  transition: 200ms;
+  border-radius: 24px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 200ms;
+  border-radius: 50%;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: var(--color-primary);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+}
+
+/* ----------------------------------------------------
+   10. MODAIS & DIÁLOGOS
+   ---------------------------------------------------- */
+.app-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.app-modal.is-open {
+  display: flex;
+}
+
+.app-modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(3, 34, 4, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.app-modal-dialog {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 20px 40px rgba(3, 34, 4, 0.2);
+  width: 100%;
+  max-width: 540px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1001;
+  animation: modalFadeIn 180ms ease;
+}
+
+.modal-dialog-sm {
+  max-width: 400px;
+}
+
+.modal-dialog-lg {
+  max-width: 720px;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.96) translateY(-8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.app-modal-header {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-modal-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--c-dark-forest);
+  margin: 0;
+}
+
+.app-modal-subtitle {
+  font-size: 12px;
+  color: var(--color-text-light);
+  margin: 2px 0 0;
+}
+
+.app-modal-close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  color: var(--color-text-light);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 140ms ease;
+}
+
+.app-modal-close:hover {
+  background-color: #f1f6f2;
+  color: var(--c-dark-forest);
+}
+
+.app-modal-body {
+  padding: var(--space-5);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.app-modal-footer {
+  padding: var(--space-3) var(--space-5);
+  border-top: 1px solid var(--color-border);
+  background-color: #fafcfb;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* Totem de Mesa para Impressão */
+.qr-print-card {
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  background-color: #ffffff;
+}
+
+.qr-card-table-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--c-dark-forest);
+  margin: 0;
+}
+
+.qr-card-instruction {
+  font-size: 12px;
+  color: var(--color-text-light);
+  max-width: 280px;
+  margin: 6px auto 0;
+}
+
+.qr-svg-wrapper svg {
+  display: block;
+  margin: 0 auto;
+}
+
+.qr-url-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-primary);
+  background-color: var(--c-mint-light);
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+/* Comanda de Pedidos */
+.order-modal-customer-card {
+  background-color: #f7faf8;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+}
+
+.order-modal-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.order-modal-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 13px;
+}
+
+.order-modal-financials {
+  border-top: 1px solid var(--color-border);
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.order-financial-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.order-financial-row.total {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-top: 4px;
+}
+
+/* Novo Pedido Picker */
+.manual-order-item-picker {
+  display: flex;
+  gap: 8px;
+}
+
+.manual-order-cart-table-wrapper {
+  max-height: 180px;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+}
+
+/* CRM Modal */
+.crm-modal-points-box {
+  background-color: #f1f6f2;
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.crm-modal-orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.crm-order-card {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+/* ----------------------------------------------------
+   11. SUPORTE A IMPRESSÃO (@media print)
+   ---------------------------------------------------- */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .app-sidebar,
+  .app-header,
+  .app-modal-backdrop,
+  .app-modal-footer,
+  .app-modal-close {
+    display: none !important;
+  }
+  .app-modal.is-open,
+  .app-modal.is-open .app-modal-dialog,
+  .app-modal.is-open .app-modal-body,
+  .qr-print-card,
+  .qr-print-card * {
+    visibility: visible !important;
+  }
+  .app-modal.is-open .app-modal-dialog {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+  }
 }

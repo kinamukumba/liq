@@ -32,6 +32,10 @@ require_once __DIR__ . '/controllers/CustomerController.php';
 require_once __DIR__ . '/controllers/CouponController.php';
 require_once __DIR__ . '/controllers/DashboardController.php';
 require_once __DIR__ . '/controllers/BackofficeController.php';
+require_once __DIR__ . '/controllers/TableController.php';
+require_once __DIR__ . '/controllers/ProductController.php';
+require_once __DIR__ . '/controllers/CrmController.php';
+require_once __DIR__ . '/controllers/UploadController.php';
 
 $request = new Request();
 $router = new Router();
@@ -81,8 +85,33 @@ $router->get('/orders/{id}', [OrderController::class, 'get']);
 $router->patch('/orders/{id}/status', [OrderController::class, 'updateStatus']);
 
 // -----------------------------------------------------------
+// Table Management & QR Code Routes
+// -----------------------------------------------------------
+$router->get('/tables', [TableController::class, 'list']);
+$router->post('/tables', [TableController::class, 'create']);
+$router->patch('/tables/{id}/status', [TableController::class, 'updateStatus']);
+
+// -----------------------------------------------------------
+// Product & Category Management Routes
+// -----------------------------------------------------------
+$router->get('/products', [ProductController::class, 'list']);
+$router->post('/products', [ProductController::class, 'create']);
+$router->patch('/products/{id}/toggle', [ProductController::class, 'toggleAvailability']);
+$router->post('/categories', [ProductController::class, 'createCategory']);
+$router->post('/upload', [UploadController::class, 'uploadImage']);
+
+// -----------------------------------------------------------
+// CRM & Loyalty Customer Routes
+// -----------------------------------------------------------
+$router->get('/crm/customers', [CrmController::class, 'listCustomers']);
+$router->get('/crm/customers/{id}', [CrmController::class, 'getCustomer']);
+
+// -----------------------------------------------------------
 // Promotional Coupons Routes
 // -----------------------------------------------------------
+$router->get('/coupons', [CouponController::class, 'list']);
+$router->post('/coupons', [CouponController::class, 'create']);
+$router->patch('/coupons/{id}/toggle', [CouponController::class, 'toggle']);
 $router->post('/coupons/validate', [CouponController::class, 'validate']);
 
 // -----------------------------------------------------------

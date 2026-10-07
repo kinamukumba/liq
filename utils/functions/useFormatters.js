@@ -54,5 +54,25 @@ const useFormatters = {
     const div = document.createElement('div');
     div.textContent = str;
     return div.innerHTML;
+  },
+
+  productImage(imgPath) {
+    if (!imgPath || typeof imgPath !== 'string' || imgPath.trim() === '') {
+      return '../assets/images/default-product.svg';
+    }
+    const clean = imgPath.trim();
+    if (clean.startsWith('http://') || clean.startsWith('https://')) {
+      return clean;
+    }
+    if (clean.startsWith('upload/')) {
+      const isSubdirectory = window.location.pathname.includes('/liq');
+      const baseApi = isSubdirectory ? '/liq/api/' : '/api/';
+      return baseApi + clean;
+    }
+    return clean;
+  },
+
+  defaultProductImage() {
+    return '../assets/images/default-product.svg';
   }
 };

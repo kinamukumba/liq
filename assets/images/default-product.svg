@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f3f6f4"/>
+      <stop offset="100%" stop-color="#e5ede7"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="16" fill="url(#bgGrad)"/>
+  
+  <!-- Prato externo -->
+  <circle cx="100" cy="100" r="64" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <circle cx="100" cy="100" r="48" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Cloche / Prato Gourmet & Talheres Vetoriais Neutros -->
+  <g stroke="#64748b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Prato central -->
+    <path d="M72 108 C 72 82, 128 82, 128 108 Z" fill="#e2e8f0" fill-opacity="0.4"/>
+    <line x1="64" y1="114" x2="136" y2="114"/>
+    <circle cx="100" cy="80" r="3" fill="#64748b"/>
+    <!-- Folha decorativa -->
+    <path d="M100 80 Q 106 68 116 68 Q 112 76 100 80 Z" fill="#149036" stroke="#149036" stroke-width="1.5"/>
+  </g>
+
+  <!-- Tag sutil de Item sem foto -->
+  <text x="100" y="146" text-anchor="middle" font-family="'Open Sans', sans-serif" font-size="10" font-weight="600" fill="#94a3b8" letter-spacing="0.5">PRATO LIQ</text>
+</svg>

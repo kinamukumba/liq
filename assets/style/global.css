@@ -37,9 +37,10 @@
   --color-text-light:       #647a68;
   --color-text-white:       #ffffff;
 
-  --color-border-subtle:    #d9ebd9;
-  --color-border-strong:    #95efb3;
-  --color-border-dark:      #024d10;
+  --color-border:           #e2e8f0;
+  --color-border-subtle:    #f1f5f9;
+  --color-border-strong:    #cbd5e1;
+  --color-border-dark:      #94a3b8;
 
   /* Status */
   --color-status-success-bg:     #eaf8ee;
