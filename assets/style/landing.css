@@ -1,0 +1,1252 @@
+/**
+ * ====================================================================
+ * LIQ SAAS - LANDING PAGE STYLESHEET (landing.css)
+ * 100% Baseado no Design e Seções da Referência Oficial
+ * - Header Oficial com links exatos: Funcionalidades, Preços, FAQ, Entrar, Começar agora
+ * - Hero com Tag, Título, CTAs e Mockup (hero-img.png)
+ * - Seção Social Proof (Empresas parceiras)
+ * - Seção Desafios (Dark Forest)
+ * - Seção Automação (3 Cards com visual)
+ * - Banner Intermediário "Comece a vender 24h"
+ * - Grid de Funcionalidades (8 Cards)
+ * - Tabela de Preços com Toggle Mensal/Anual (Starter, Pro Recomendado, Enterprise)
+ * - Seção Proposta de Valor (3 Colunas)
+ * - Banner Final CTA
+ * - FAQ Accordion Completo
+ * - Footer Dark Forest Oficial
+ * ====================================================================
+ */
+
+/* ----------------------------------------------------
+   1. RESET & GERAL
+   ---------------------------------------------------- */
+.landing-body {
+  min-height: 100vh;
+  background-color: #ffffff;
+  color: #032204;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.landing-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .landing-container {
+    padding: 0 16px;
+  }
+}
+
+/* ----------------------------------------------------
+   2. HEADER / NAVBAR (Exatamente como a imagem)
+   ---------------------------------------------------- */
+/* ----------------------------------------------------
+   2. HEADER / NAVBAR (Vidro Transparente / Glassmorphism)
+   ---------------------------------------------------- */
+.landing-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid rgba(20, 144, 54, 0.12);
+  box-shadow: 0 4px 20px rgba(3, 34, 4, 0.03);
+  padding: 16px 0;
+  transition: background-color 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.landing-navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.landing-navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.landing-brand-logo {
+  height: 34px;
+  width: auto;
+  display: block;
+}
+
+.landing-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.landing-nav-link {
+  color: #37513b;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.landing-nav-link:hover {
+  color: #149036;
+}
+
+.landing-navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.landing-nav-login {
+  color: #032204;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.landing-nav-login:hover {
+  color: #149036;
+}
+
+.landing-nav-btn {
+  background-color: #26cd59;
+  color: #032204;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 160ms ease;
+  box-shadow: 0 1px 3px rgba(38, 205, 89, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-nav-btn:hover {
+  background-color: #149036;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(20, 144, 54, 0.3);
+}
+
+/* Botão Hamburger Mobile (Oculto no Desktop) */
+.landing-mobile-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  border: 1px solid rgba(20, 144, 54, 0.2);
+  background-color: rgba(255, 255, 255, 0.75);
+  color: #032204;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.landing-mobile-toggle:hover {
+  background-color: rgba(224, 250, 233, 0.6);
+  color: #149036;
+  border-color: #149036;
+}
+
+/* Dropdown Mobile com Efeito de Vidro Desfocado */
+.landing-mobile-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border-bottom: 1px solid rgba(20, 144, 54, 0.15);
+  box-shadow: 0 16px 36px rgba(3, 34, 4, 0.10);
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity 220ms ease, transform 220ms ease;
+  z-index: 999;
+}
+
+.landing-mobile-dropdown.is-open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.mobile-dropdown-content {
+  padding: 20px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mobile-dropdown-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-dropdown-link {
+  color: #032204;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 8px 4px;
+  transition: color 150ms ease, transform 150ms ease;
+}
+
+.mobile-dropdown-link:hover {
+  color: #149036;
+  transform: translateX(4px);
+}
+
+.mobile-dropdown-divider {
+  height: 1px;
+  background-color: rgba(20, 144, 54, 0.12);
+  margin: 4px 0;
+}
+
+.mobile-dropdown-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-dropdown-login {
+  color: #032204;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  padding: 11px 0;
+  text-decoration: none;
+  border-radius: 6px;
+  border: 1px solid rgba(20, 144, 54, 0.2);
+  background-color: rgba(255, 255, 255, 0.7);
+  transition: all 150ms ease;
+  display: block;
+}
+
+.mobile-dropdown-login:hover {
+  background-color: #f7faf8;
+  color: #149036;
+  border-color: #149036;
+}
+
+.mobile-dropdown-btn {
+  background-color: #26cd59;
+  color: #032204;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  padding: 13px 0;
+  text-decoration: none;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(38, 205, 89, 0.35);
+  transition: all 150ms ease;
+  display: block;
+}
+
+.mobile-dropdown-btn:hover {
+  background-color: #149036;
+  color: #ffffff;
+}
+
+@media (max-width: 820px) {
+  .landing-nav-links,
+  .landing-navbar-right {
+    display: none;
+  }
+
+  .landing-mobile-toggle {
+    display: inline-flex;
+  }
+
+  .landing-mobile-dropdown {
+    display: block;
+  }
+}
+
+/* ----------------------------------------------------
+   3. SEÇÃO HERO COM BACKGROUND GRID & EFEITOS GEOMÉTRICOS
+   ---------------------------------------------------- */
+.landing-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 64px 0 72px;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+/* Background Effects */
+.hero-bg-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, #ffffff 0%, rgba(224, 250, 233, 0.40) 45%, #ffffff 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-bg-radial {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at 50% 18%, rgba(38, 205, 89, 0.16) 0%, rgba(20, 144, 54, 0.05) 50%, transparent 75%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Grid Pattern (Conjunto de Squares) */
+.hero-bg-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(to right, rgba(20, 144, 54, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 144, 54, 0.08) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 32%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0.15) 75%, transparent 95%);
+  mask-image: radial-gradient(ellipse at 50% 32%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0.15) 75%, transparent 95%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.landing-hero .landing-container {
+  position: relative;
+  z-index: 5;
+}
+
+.hero-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #149036;
+  background-color: #e0fae9;
+  border: 1px solid #95efb3;
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+}
+
+.hero-main-title {
+  font-size: 2.875rem;
+  font-weight: 800;
+  line-height: 1.16;
+  color: #032204;
+  letter-spacing: -0.025em;
+  max-width: 840px;
+  margin: 0 auto 20px;
+}
+
+@media (max-width: 768px) {
+  .hero-main-title {
+    font-size: 2.125rem;
+  }
+}
+
+.hero-main-subtitle {
+  font-size: 1.0625rem;
+  color: #37513b;
+  line-height: 1.6;
+  max-width: 680px;
+  margin: 0 auto 32px;
+}
+
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 56px;
+  flex-wrap: wrap;
+}
+
+.hero-btn-primary {
+  background-color: #26cd59;
+  color: #032204;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(38, 205, 89, 0.35);
+  transition: all 160ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-btn-primary:hover {
+  background-color: #149036;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(20, 144, 54, 0.4);
+}
+
+.hero-btn-secondary {
+  background-color: #ffffff;
+  color: #032204;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 8px;
+  border: 1px solid #d9ebd9;
+  text-decoration: none;
+  transition: all 160ms ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-btn-secondary:hover {
+  background-color: #f7faf8;
+  border-color: #149036;
+  color: #149036;
+}
+
+/* Mockup Central do Hero (hero-img.png) - Sem box, mais para cima e com animação 3D Tilt */
+.hero-mockup-wrapper {
+  max-width: 1040px;
+  margin: -28px auto 0;
+  position: relative;
+  perspective: 1200px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-mockup-image {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 20px 45px rgba(3, 34, 4, 0.18));
+  border: none;
+  background: transparent;
+  transform-style: preserve-3d;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), filter 180ms ease;
+  will-change: transform;
+  cursor: pointer;
+}
+
+.social-proof-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #647a68;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.social-proof-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+  opacity: 0.75;
+}
+
+.proof-brand-item {
+  font-size: 17px;
+  font-weight: 800;
+  color: #37513b;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ----------------------------------------------------
+   5. SEÇÃO DESAFIOS (Dark Forest)
+   ---------------------------------------------------- */
+.landing-challenges-section {
+  background-color: #032204;
+  color: #ffffff;
+  padding: 80px 0;
+  position: relative;
+}
+
+.challenges-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 48px;
+}
+
+.challenges-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .challenges-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.challenge-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.challenge-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(38, 205, 89, 0.15);
+  color: #06f956;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.challenge-text {
+  font-size: 15px;
+  font-weight: 500;
+  color: #e0fae9;
+}
+
+.challenges-chevron {
+  text-align: center;
+  margin-top: 40px;
+  color: #26cd59;
+}
+
+/* ----------------------------------------------------
+   6. SEÇÃO AUTOMAÇÃO (3 Cards com Visual)
+   ---------------------------------------------------- */
+.landing-automate-section {
+  padding: 88px 0;
+  background-color: #ffffff;
+}
+
+.automate-header {
+  margin-bottom: 48px;
+  max-width: 600px;
+}
+
+.automate-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #032204;
+  letter-spacing: -0.02em;
+}
+
+.automate-title span {
+  color: #149036;
+}
+
+.automate-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+@media (max-width: 900px) {
+  .automate-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.automate-card {
+  border-radius: 12px;
+  border: 1px solid #eef5ef;
+  background-color: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(3, 34, 4, 0.04);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.automate-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(3, 34, 4, 0.08);
+}
+
+.automate-card-preview {
+  height: 160px;
+  background-color: #e0fae9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-bottom: 1px solid #d9ebd9;
+}
+
+.automate-preview-box {
+  background-color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(3, 34, 4, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #149036;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.automate-card-body {
+  padding: 24px;
+}
+
+.automate-card-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #032204;
+  margin-bottom: 8px;
+}
+
+.automate-card-desc {
+  font-size: 14px;
+  color: #37513b;
+  line-height: 1.5;
+}
+
+/* ----------------------------------------------------
+   7. BANNER INTERMEDIÁRIO (Parallax com sections-img)
+   ---------------------------------------------------- */
+.landing-mid-banner {
+  position: relative;
+  background-image: linear-gradient(rgba(3, 34, 4, 0.78), rgba(3, 34, 4, 0.90)), url('../images/sections-img01.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 104px 0;
+  text-align: center;
+  color: #ffffff;
+}
+
+.mid-banner-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.mid-banner-btn {
+  background-color: #26cd59;
+  color: #032204;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 12px 30px;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 160ms ease;
+}
+
+.mid-banner-btn:hover {
+  background-color: #149036;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* ----------------------------------------------------
+   8. GRID DE FUNCIONALIDADES (8 Cards)
+   ---------------------------------------------------- */
+.landing-features-section {
+  padding: 96px 0;
+  background-color: #ffffff;
+}
+
+.features-section-tag {
+  font-size: 12px;
+  font-weight: 700;
+  color: #149036;
+  background-color: #e0fae9;
+  padding: 4px 12px;
+  border-radius: 12px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.features-section-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #032204;
+  line-height: 1.22;
+  max-width: 650px;
+  margin-bottom: 48px;
+}
+
+.features-section-title span {
+  color: #149036;
+}
+
+.features-octa-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .features-octa-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .features-octa-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-box-card {
+  border: 1px solid #eef5ef;
+  border-radius: 10px;
+  padding: 22px;
+  background-color: #ffffff;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.feature-box-card:hover {
+  transform: translateY(-2px);
+  border-color: #26cd59;
+  box-shadow: 0 8px 20px rgba(3, 34, 4, 0.06);
+}
+
+.feature-box-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background-color: #e0fae9;
+  color: #149036;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.feature-box-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #032204;
+  margin-bottom: 6px;
+}
+
+.feature-box-desc {
+  font-size: 13px;
+  color: #37513b;
+  line-height: 1.45;
+}
+
+/* ----------------------------------------------------
+   9. TABELA DE PREÇOS (Dark Forest)
+   ---------------------------------------------------- */
+.landing-pricing-section {
+  background-color: #032204;
+  color: #ffffff;
+  padding: 96px 0;
+}
+
+.pricing-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 36px;
+}
+
+.pricing-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.pricing-subtitle {
+  font-size: 15px;
+  color: #95efb3;
+}
+
+.pricing-toggle-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 48px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e0fae9;
+}
+
+.pricing-toggle-switch {
+  width: 48px;
+  height: 26px;
+  background-color: #149036;
+  border-radius: 14px;
+  position: relative;
+  cursor: pointer;
+}
+
+.pricing-toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: transform 200ms ease;
+}
+
+.pricing-toggle-switch.active::after {
+  transform: translateX(22px);
+}
+
+.pricing-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .pricing-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pricing-card {
+  border-radius: 14px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Card Pro Destacado / Recomendado */
+.pricing-card.pricing-card-featured {
+  background-color: #ffffff;
+  color: #032204;
+  border-color: #26cd59;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  position: relative;
+}
+
+.pricing-featured-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #26cd59;
+  color: #032204;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 12px;
+  letter-spacing: 0.05em;
+}
+
+.pricing-plan-name {
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+  color: inherit;
+}
+
+.pricing-plan-price {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 6px;
+  color: inherit;
+}
+
+.pricing-plan-price span {
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.pricing-plan-subtitle {
+  font-size: 13px;
+  opacity: 0.75;
+  margin-bottom: 24px;
+}
+
+.pricing-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.pricing-feature-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+}
+
+.pricing-check-icon {
+  color: #26cd59;
+  flex-shrink: 0;
+}
+
+.pricing-card-featured .pricing-check-icon {
+  color: #149036;
+}
+
+.pricing-card-btn {
+  width: 100%;
+  padding: 13px 0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  transition: all 160ms ease;
+  display: block;
+}
+
+.pricing-card-btn-outline {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+.pricing-card-btn-outline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+}
+
+.pricing-card-btn-featured {
+  background-color: #26cd59;
+  color: #032204;
+  border: none;
+  box-shadow: 0 4px 12px rgba(38, 205, 89, 0.4);
+}
+
+.pricing-card-btn-featured:hover {
+  background-color: #149036;
+  color: #ffffff;
+}
+
+/* ----------------------------------------------------
+   10. SEÇÃO PROPOSTA DE VALOR (3 Colunas)
+   ---------------------------------------------------- */
+.landing-value-section {
+  padding: 96px 0;
+  background-color: #ffffff;
+}
+
+.value-section-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #032204;
+  max-width: 600px;
+  margin-bottom: 56px;
+  letter-spacing: -0.02em;
+}
+
+.value-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+@media (max-width: 860px) {
+  .value-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.value-card {
+  padding: 8px 0;
+}
+
+.value-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background-color: #e0fae9;
+  color: #149036;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.value-card-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #032204;
+  margin-bottom: 10px;
+}
+
+.value-card-desc {
+  font-size: 14px;
+  color: #37513b;
+  line-height: 1.55;
+}
+
+/* ----------------------------------------------------
+   11. BANNER FINAL CTA (Parallax com sections-img)
+   ---------------------------------------------------- */
+.landing-cta-banner {
+  position: relative;
+  background-image: linear-gradient(rgba(3, 34, 4, 0.80), rgba(3, 34, 4, 0.92)), url('../images/sections-img02.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 104px 0;
+  text-align: center;
+  color: #ffffff;
+}
+
+.cta-banner-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 24px;
+}
+
+.cta-banner-btn {
+  background-color: transparent;
+  border: 1px solid #26cd59;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 32px;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 160ms ease;
+}
+
+.cta-banner-btn:hover {
+  background-color: #26cd59;
+  color: #032204;
+}
+
+/* ----------------------------------------------------
+   12. FAQ ACCORDION
+   ---------------------------------------------------- */
+.landing-faq-section {
+  padding: 96px 0;
+  background-color: #ffffff;
+  border-top: 1px solid #eef5ef;
+}
+
+.faq-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 56px;
+}
+
+@media (max-width: 860px) {
+  .faq-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.faq-left-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #032204;
+  margin-bottom: 12px;
+}
+
+.faq-left-desc {
+  font-size: 14px;
+  color: #647a68;
+}
+
+.faq-accordion-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  border: 1px solid #e2ece3;
+  border-radius: 8px;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.faq-question-btn {
+  width: 100%;
+  padding: 18px 20px;
+  background: none;
+  border: none;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: #032204;
+  font-family: inherit;
+  transition: background-color 150ms ease;
+}
+
+.faq-question-btn:hover {
+  background-color: #f7faf8;
+}
+
+.faq-arrow-icon {
+  transition: transform 200ms ease;
+  color: #149036;
+}
+
+.faq-item.active .faq-arrow-icon {
+  transform: rotate(180deg);
+}
+
+.faq-answer-panel {
+  display: none;
+  padding: 0 20px 18px;
+  font-size: 14px;
+  color: #37513b;
+  line-height: 1.55;
+}
+
+.faq-item.active .faq-answer-panel {
+  display: block;
+}
+
+.faq-support-footer {
+  margin-top: 24px;
+  font-size: 13.5px;
+  color: #647a68;
+}
+
+.faq-support-footer a {
+  color: #149036;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ----------------------------------------------------
+   13. FOOTER DARK FOREST (Exatamente como a imagem)
+   ---------------------------------------------------- */
+.landing-footer-dark {
+  background-color: #032204;
+  color: #ffffff;
+  padding: 72px 0 36px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-top-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 56px;
+}
+
+@media (max-width: 860px) {
+  .footer-top-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .footer-top-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.footer-brand-logo {
+  height: 32px;
+  width: auto;
+  margin-bottom: 16px;
+}
+
+.footer-brand-desc {
+  font-size: 13px;
+  color: #95efb3;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  max-width: 300px;
+}
+
+.footer-brand-email {
+  font-size: 13px;
+  color: #e0fae9;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.footer-column-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 18px;
+}
+
+.footer-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links-list a {
+  color: #95efb3;
+  font-size: 13.5px;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.footer-links-list a:hover {
+  color: #ffffff;
+}
+
+.footer-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 12px;
+  color: #95efb3;
+}

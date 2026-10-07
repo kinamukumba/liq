@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verificação OTP | LIQ SAAS</title>
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+
+  <!-- Estilos Externos (Sem CSS interno nem inline) -->
+  <link rel="stylesheet" href="../../assets/style/global.css">
+  <link rel="stylesheet" href="../../assets/style/components.css">
+  <link rel="stylesheet" href="../../assets/style/auth.css">
+</head>
+<body>
+
+  <div class="auth-split-wrapper">
+    
+    <!-- Lado Esquerdo: Formulário OTP -->
+    <main class="auth-form-column">
+      <div class="auth-form-card">
+        
+        <header>
+          <a href="../../index.html">
+            <img src="../../assets/images/logo.png" alt="LIQ SAAS" class="auth-brand-logo">
+          </a>
+          
+          <div class="onboard-step-pill" id="otp-flow-step-tag">Segurança &bull; Confirmação de Identidade</div>
+          
+          <h1 class="auth-title">Código de Verificação</h1>
+          <p class="auth-subtitle">
+            Insira o código de 6 dígitos enviado para validar a sua operação na plataforma.
+          </p>
+        </header>
+
+        <!-- Contador Regressivo de 10 Minutos -->
+        <div>
+          <span class="otp-timer-badge">
+            <span data-icon="clock" data-icon-size="14"></span>
+            <span>Código válido por: <strong id="otp-countdown-text">10:00</strong></span>
+          </span>
+        </div>
+
+        <form id="form-otp" novalidate>
+          
+          <!-- 6 Inputs Independentes de Dígitos -->
+          <div class="otp-inputs-wrapper" id="otp-inputs-container">
+            <input type="text" maxlength="1" class="otp-digit" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" required autofocus>
+            <input type="text" maxlength="1" class="otp-digit" inputmode="numeric" pattern="[0-9]*" required>
+            <input type="text" maxlength="1" class="otp-digit" inputmode="numeric" pattern="[0-9]*" required>
+            <input type="text" maxlength="1" class="otp-digit" inputmode="numeric" pattern="[0-9]*" required>
+            <input type="text" maxlength="1" class="otp-digit" inputmode="numeric" pattern="[0-9]*" required>
+            <input type="text" maxlength="1" class="otp-digit" inputmode="numeric" pattern="[0-9]*" required>
+          </div>
+
+          <!-- Botão de Ação -->
+          <button type="submit" id="btn-submit-otp" class="btn btn-primary btn-lg btn-full">
+            <span>Verificar e Prosseguir</span>
+            <span data-icon="check" data-icon-size="16"></span>
+          </button>
+
+          <!-- Reenvio de Código -->
+          <p class="auth-switch-link">
+            Não recebeu o código? 
+            <button type="button" id="btn-resend-otp" class="btn btn-ghost btn-sm text-green font-semibold">
+              Reenviar código
+            </button>
+          </p>
+
+        </form>
+
+      </div>
+    </main>
+
+    <!-- Lado Direito: Showcase -->
+    <aside class="auth-showcase-column">
+      <div class="auth-showcase-content">
+        
+        <div>
+          <h2 class="auth-showcase-headline">Segurança em múltiplas camadas para seu negócio</h2>
+          <p class="auth-showcase-subtext">Protegemos as receitas, dados de clientes e acessos operacionais com criptografia avançada.</p>
+        </div>
+
+        <div class="auth-benefit-list">
+          
+          <div class="auth-benefit-item">
+            <div class="auth-benefit-icon-wrapper">
+              <span data-icon="check" data-icon-size="22"></span>
+            </div>
+            <div class="auth-benefit-text-group">
+              <h3 class="auth-benefit-title">Tokens de Sessão Protegidos</h3>
+              <p class="auth-benefit-desc">Validação contínua no servidor com hashing SHA-256 e cookies HttpOnly contra ataques.</p>
+            </div>
+          </div>
+
+          <div class="auth-benefit-item">
+            <div class="auth-benefit-icon-wrapper">
+              <span data-icon="orders" data-icon-size="22"></span>
+            </div>
+            <div class="auth-benefit-text-group">
+              <h3 class="auth-benefit-title">Auditoria de Ações</h3>
+              <p class="auth-benefit-desc">Registro permanente de alterações de preços, status de pedidos e movimentações financeiras.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="../../assets/script/icons.js"></script>
+  <script src="../../utils/function/useAlert.js"></script>
+  <script src="../../utils/functions/useFormatters.js"></script>
+  <script src="../../utils/functions/useValidation.js"></script>
+  <script src="../../utils/functions/useApi.js"></script>
+  <script src="../../assets/script/auth-otp.js"></script>
+</body>
+</html>

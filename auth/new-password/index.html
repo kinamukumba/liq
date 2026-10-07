@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Nova Senha | LIQ SAAS</title>
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+
+  <!-- Estilos Externos (Sem CSS interno nem inline) -->
+  <link rel="stylesheet" href="../../assets/style/global.css">
+  <link rel="stylesheet" href="../../assets/style/components.css">
+  <link rel="stylesheet" href="../../assets/style/auth.css">
+</head>
+<body>
+
+  <div class="auth-split-wrapper">
+    
+    <!-- Lado Esquerdo: Formulário de Nova Senha -->
+    <main class="auth-form-column">
+      <div class="auth-form-card">
+        
+        <header>
+          <a href="../../index.html">
+            <img src="../../assets/images/logo.png" alt="LIQ SAAS" class="auth-brand-logo">
+          </a>
+          
+          <div class="onboard-step-pill">Nova Credencial de Segurança</div>
+          
+          <h1 class="auth-title">Definir nova senha</h1>
+          <p class="auth-subtitle">
+            Crie uma senha forte e memorize-a. Ela será usada para gerenciar seus pedidos, cardápio e faturamento.
+          </p>
+        </header>
+
+        <!-- Indicador de Validade do Token de 10 Minutos -->
+        <div id="token-validity-status">
+          <span class="otp-timer-badge">
+            <span data-icon="clock" data-icon-size="14"></span>
+            <span id="token-status-text">Token de redefinição válido</span>
+          </span>
+        </div>
+
+        <!-- Alerta de Token Expirado -->
+        <div id="token-expired-alert" class="alert alert-danger d-none" role="alert">
+          <span data-icon="alertCircle" data-icon-size="16"></span>
+          <div>
+            <strong>Token de 10 minutos expirado</strong>
+            <p class="text-xs mt-1">Por razões de segurança, solicite um novo link de redefinição.</p>
+            <div class="mt-2">
+              <a href="../resend/index.html" class="btn btn-sm btn-secondary">
+                Solicitar novo link
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <form id="form-new-password" novalidate>
+          
+          <!-- Nova Senha -->
+          <div class="form-group">
+            <label for="input-new-pass" class="form-label">
+              Nova Senha de Acesso <span class="required">*</span>
+            </label>
+            <div class="input-group">
+              <input 
+                type="password" 
+                id="input-new-pass" 
+                class="form-control" 
+                placeholder="Mínimo 8 caracteres (letras e números)" 
+                autocomplete="new-password" 
+                required
+              >
+              <button type="button" id="btn-toggle-newpass" class="btn btn-secondary btn-icon" title="Mostrar/ocultar senha">
+                <span data-icon="user" data-icon-size="16"></span>
+              </button>
+            </div>
+
+            <!-- Medidor de Força -->
+            <div class="password-strength-container">
+              <div class="password-strength-bar">
+                <div id="newpass-strength-meter" class="password-strength-fill"></div>
+              </div>
+              <span id="newpass-strength-hint" class="password-strength-label">A senha deve ter pelo menos 8 caracteres.</span>
+            </div>
+          </div>
+
+          <!-- Confirmar Nova Senha -->
+          <div class="form-group">
+            <label for="input-confirm-pass" class="form-label">
+              Confirmar Nova Senha <span class="required">*</span>
+            </label>
+            <input 
+              type="password" 
+              id="input-confirm-pass" 
+              class="form-control" 
+              placeholder="Digite a mesma senha novamente" 
+              autocomplete="new-password" 
+              required
+            >
+          </div>
+
+          <!-- Botão de Submissão -->
+          <button type="submit" id="btn-submit-newpass" class="btn btn-primary btn-lg btn-full mt-3">
+            <span>Salvar Senha e Acessar Painel</span>
+            <span data-icon="check" data-icon-size="16"></span>
+          </button>
+
+        </form>
+
+      </div>
+    </main>
+
+    <!-- Lado Direito: Showcase -->
+    <aside class="auth-showcase-column">
+      <div class="auth-showcase-content">
+        
+        <div>
+          <h2 class="auth-showcase-headline">Segurança Corporativa para Restaurantes</h2>
+          <p class="auth-showcase-subtext">Proteja o fluxo de vendas do seu estabelecimento com controle de senhas robusto.</p>
+        </div>
+
+        <div class="auth-benefit-list">
+          
+          <div class="auth-benefit-item">
+            <div class="auth-benefit-icon-wrapper">
+              <span data-icon="check" data-icon-size="22"></span>
+            </div>
+            <div class="auth-benefit-text-group">
+              <h3 class="auth-benefit-title">Criptografia BCrypt no Servidor</h3>
+              <p class="auth-benefit-desc">Senhas nunca trafegam ou são armazenadas em texto puro, atendendo aos padrões internacionais de segurança.</p>
+            </div>
+          </div>
+
+          <div class="auth-benefit-item">
+            <div class="auth-benefit-icon-wrapper">
+              <span data-icon="dashboard" data-icon-size="22"></span>
+            </div>
+            <div class="auth-benefit-text-group">
+              <h3 class="auth-benefit-title">Acesso Direto ao Dashboard</h3>
+              <p class="auth-benefit-desc">Assim que redefinida, acesse imediatamente os painéis de pedidos, mesas e faturamento.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="../../assets/script/icons.js"></script>
+  <script src="../../utils/function/useAlert.js"></script>
+  <script src="../../utils/functions/useFormatters.js"></script>
+  <script src="../../utils/functions/useValidation.js"></script>
+  <script src="../../utils/functions/useApi.js"></script>
+  <script src="../../assets/script/auth-new-password.js"></script>
+</body>
+</html>

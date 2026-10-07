@@ -1,0 +1,9 @@
+Chat, vou te explicar a lógica da plataforma.
+Na pasta /auth/login/index deve ser a página de login para restaurantes (email e senha) super veiricação dos campos e autenticação no frontend e no backend.
+Na pasta /auth/register deve ser a página de cadastro para restaurantes (nome, email, etelefone/whatsapp, senha, localização), depois segue para um onboard /auth/onboard, com perguntas como, ten um sistema de gestão? e outros... com super veiricação dos campos e autenticação no frontend e no backend.
+Na pasta /auth/otp/ deve ser a página de verificação otp de registro e recuperação de senha com super veiricação dos campos e autenticação no frontend e no backend.
+Na pasta /auth/resend/ deve ser para redefinir senha colocando o email para verificação e envio de email de verificação para redifinir senha, caso o email idebtificado nãoe stiver cadastrado na base da dados a plataforma deve barrar. O link enviado no email para redefinir senha deve rencaminhas para /auth/new-password/{token}. Token de 10min.
+
+Depois de todo o processo de autenticação verificado o restautente deve ir até ao seu dashboard.
+
+Por agora vamos ainda construir o frontend das páginas para o restaurante

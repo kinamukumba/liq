@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Menu Digital & Atendimento | LIQ</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+  <!-- Estilos Externos Estritos (Sem CSS interno nem inline) -->
+  <link rel="stylesheet" href="../assets/style/global.css">
+  <link rel="stylesheet" href="../assets/style/components.css">
+  <link rel="stylesheet" href="../assets/style/client.css">
+</head>
+<body>
+
+  <!-- Contêiner Mobile / PWA -->
+  <div class="client-viewport">
+    
+    <!-- Topbar com Logo e Identificação da Mesa -->
+    <header class="client-topbar">
+      <div class="client-brand-group">
+        <img src="../assets/images/favicon.png" alt="LIQ" class="brand-favicon-img">
+        <div>
+          <h1 id="header-restaurant-name" class="client-brand-title">Café Central</h1>
+          <div class="mt-1">
+            <span id="header-table-badge" class="badge badge-available">
+              <span class="badge-dot"></span> Mesa 07
+            </span>
+          </div>
+        </div>
+      </div>
+      <div id="customer-chip-slot"></div>
+    </header>
+
+    <!-- Banner Pedido Ativo -->
+    <div id="active-order-banner" class="alert alert-info mx-3 mt-3 d-none">
+      <div class="flex-1 d-flex items-center gap-2">
+        <span data-icon="clock" data-icon-size="16"></span>
+        <span class="text-xs">Você tem um pedido ativo em andamento.</span>
+      </div>
+      <button type="button" id="btn-view-active-order" class="btn btn-sm btn-outline">
+        Acompanhar
+      </button>
+    </div>
+
+    <!-- Barra de Categorias Horizontal (Pills) -->
+    <nav class="client-categories-bar" id="categories-bar"></nav>
+
+    <!-- Lista de Itens do Cardápio -->
+    <main class="client-menu-list" id="menu-items-list">
+      <div class="card p-6 text-center text-muted">Carregando cardápio...</div>
+    </main>
+
+    <!-- Barra Flutuante de Carrinho -->
+    <div id="client-cart-floating" class="client-cart-floating d-none">
+      <div>
+        <div id="floating-cart-qty" class="cart-summary-qty">0 itens</div>
+        <div id="floating-cart-total" class="cart-summary-total">0,00 Kz</div>
+      </div>
+      <button type="button" id="btn-open-cart" class="btn btn-primary btn-md">
+        <span data-icon="cart" data-icon-size="16"></span>
+        Ver Carrinho
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Modal do Carrinho -->
+  <div id="modal-cart" class="modal-backdrop d-none">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="d-flex items-center gap-2">
+          <span data-icon="cart" data-icon-size="18"></span>
+          <h2 class="modal-title">Meu Carrinho</h2>
+        </div>
+        <button type="button" id="btn-close-cart" class="btn btn-ghost btn-sm btn-icon">
+          <span data-icon="x" data-icon-size="16"></span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div id="cart-drawer-items"></div>
+
+        <!-- Seção de Cupom -->
+        <div class="form-group mt-3">
+          <label class="form-label">Cupom de Desconto</label>
+          <div class="input-group">
+            <input type="text" id="input-coupon-code" class="form-control" placeholder="Ex: BEMVINDO10">
+            <button type="button" id="btn-apply-coupon" class="btn btn-secondary btn-md">Aplicar</button>
+          </div>
+          <div id="coupon-feedback" class="form-helper"></div>
+        </div>
+
+        <!-- Observações -->
+        <div class="form-group">
+          <label class="form-label">Observações do Pedido</label>
+          <input type="text" id="input-order-notes" class="form-control" placeholder="Ex: Sem cebola, gelo à parte...">
+        </div>
+
+        <!-- Totais -->
+        <div class="cart-summary-box">
+          <div class="cart-summary-row">
+            <span>Subtotal</span>
+            <span id="cart-subtotal-val">0,00 Kz</span>
+          </div>
+          <div class="cart-summary-row d-none text-green font-medium" id="cart-discount-row">
+            <span>Desconto</span>
+            <span id="cart-discount-val">0,00 Kz</span>
+          </div>
+          <div class="cart-summary-row final-total">
+            <span>Total a Pagar</span>
+            <span id="cart-total-val">0,00 Kz</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" id="btn-checkout" class="btn btn-primary btn-lg btn-full">
+          Confirmar e Enviar Pedido
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Identificação do Cliente (Primeiro Pedido) -->
+  <div id="modal-customer-identify" class="modal-backdrop d-none">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="d-flex items-center gap-2">
+          <span data-icon="user" data-icon-size="18"></span>
+          <h2 class="modal-title">Identificação do Cliente</h2>
+        </div>
+        <button type="button" onclick="usePanels.toggle('modal-customer-identify', false)" class="btn btn-ghost btn-sm btn-icon">
+          <span data-icon="x" data-icon-size="16"></span>
+        </button>
+      </div>
+      <form id="form-customer-identify">
+        <div class="modal-body">
+          <p class="text-xs text-muted mb-3">
+            Identifique-se uma única vez. Nas próximas visitas nesta ou noutras mesas, você será reconhecido automaticamente para acumular pontos e cupons.
+          </p>
+
+          <div class="form-group">
+            <label class="form-label">Nome Completo <span class="required">*</span></label>
+            <input type="text" id="input-cust-name" class="form-control" placeholder="Seu nome" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Telefone / WhatsApp <span class="required">*</span></label>
+            <input type="tel" id="input-cust-phone" class="form-control" placeholder="+244 9xx xxx xxx" required>
+            <span class="form-helper">Utilizado para avisos do estado do seu pedido e fidelidade.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">E-mail (Opcional)</label>
+            <input type="email" id="input-cust-email" class="form-control" placeholder="seuemail@exemplo.com">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary btn-md btn-full">
+            Salvar e Prosseguir com Pedido
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Carteira de Fidelidade -->
+  <div id="modal-wallet" class="modal-backdrop d-none">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="d-flex items-center gap-2">
+          <span data-icon="loyalty" data-icon-size="18"></span>
+          <h2 class="modal-title">Minha Carteira de Fidelidade</h2>
+        </div>
+        <button type="button" onclick="usePanels.toggle('modal-wallet', false)" class="btn btn-ghost btn-sm btn-icon">
+          <span data-icon="x" data-icon-size="16"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="metrics-grid mb-3">
+          <div class="card-metric p-3">
+            <span class="card-metric-label">Pontos Acumulados</span>
+            <span class="card-metric-value text-green" id="wallet-points-val">0</span>
+          </div>
+          <div class="card-metric p-3">
+            <span class="card-metric-label">Pedidos Concluídos</span>
+            <span class="card-metric-value" id="wallet-orders-val">0</span>
+          </div>
+        </div>
+
+        <div class="card p-3">
+          <div class="text-xs font-semibold text-dark-green">Próximo Benefício</div>
+          <div class="text-base font-bold mt-1" id="wallet-next-target-val">10 pedidos</div>
+          <p class="text-xs text-muted mt-1">
+            Faltam apenas <strong id="wallet-remaining-val" class="text-main">2 pedidos</strong> para desbloquear 10% de desconto especial!
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" onclick="usePanels.toggle('modal-wallet', false)" class="btn btn-secondary btn-md">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Acompanhamento do Pedido -->
+  <div id="modal-tracking" class="modal-backdrop d-none">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <h2 class="modal-title">Acompanhar Pedido <span id="track-order-num">#0</span></h2>
+          <div class="text-xs text-muted mt-1" id="track-order-table">Mesa 07</div>
+        </div>
+        <button type="button" onclick="usePanels.toggle('modal-tracking', false)" class="btn btn-ghost btn-sm btn-icon">
+          <span data-icon="x" data-icon-size="16"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-between items-center mb-3">
+          <span class="text-xs font-semibold">Estado Atual</span>
+          <span id="track-status-badge" class="badge badge-pending">Pendente</span>
+        </div>
+
+        <!-- Linha do Tempo -->
+        <div class="timeline-steps">
+          <div class="timeline-step" id="track-step-pending">
+            <div class="step-circle">1</div>
+            <div class="step-label">Pedido Recebido</div>
+          </div>
+          <div class="timeline-step" id="track-step-confirmed">
+            <div class="step-circle">2</div>
+            <div class="step-label">Confirmado pelo Restaurante</div>
+          </div>
+          <div class="timeline-step" id="track-step-preparing">
+            <div class="step-circle">3</div>
+            <div class="step-label">Em Preparação na Cozinha</div>
+          </div>
+          <div class="timeline-step" id="track-step-ready">
+            <div class="step-circle">4</div>
+            <div class="step-label">Pronto para Entrega</div>
+          </div>
+          <div class="timeline-step" id="track-step-completed">
+            <div class="step-circle">5</div>
+            <div class="step-label">Entregue e Concluído</div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-between items-center pt-3 border-top">
+          <span class="text-sm text-muted">Total do Pedido</span>
+          <span class="text-base font-bold text-main" id="track-order-total">0,00 Kz</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" onclick="usePanels.toggle('modal-tracking', false)" class="btn btn-primary btn-md btn-full">
+          Voltar ao Cardápio
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts Estruturados (Sem CSS interno nem inline) -->
+  <script src="../assets/script/icons.js"></script>
+  <script src="../utils/function/useAlert.js"></script>
+  <script src="../utils/functions/useFormatters.js"></script>
+  <script src="../utils/functions/useApi.js"></script>
+  <script src="../utils/functions/usePanels.js"></script>
+  <script src="../assets/script/client.js"></script>
+</body>
+</html>

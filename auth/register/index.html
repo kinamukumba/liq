@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastrar Restaurante | LIQ SAAS</title>
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+
+  <!-- Estilos Externos (Sem CSS interno nem inline) -->
+  <link rel="stylesheet" href="../../assets/style/global.css">
+  <link rel="stylesheet" href="../../assets/style/components.css">
+  <link rel="stylesheet" href="../../assets/style/auth.css">
+</head>
+<body>
+
+  <div class="auth-split-wrapper">
+    
+    <!-- Lado Esquerdo: Formulário de Registro -->
+    <main class="auth-form-column">
+      <div class="auth-form-card">
+        
+        <header>
+          <a href="../../index.html">
+            <img src="../../assets/images/logo.png" alt="LIQ SAAS" class="auth-brand-logo">
+          </a>
+          <h1 class="auth-title">Cadastre o seu restaurante</h1>
+          <p class="auth-subtitle">Crie sua conta corporativa e digitalize o atendimento do seu estabelecimento.</p>
+        </header>
+
+        <form id="form-register" novalidate>
+          
+          <!-- Nome do Restaurante / Responsável -->
+          <div class="form-group">
+            <label for="input-reg-name" class="form-label">
+              Nome do Restaurante / Estabelecimento <span class="required">*</span>
+            </label>
+            <input 
+              type="text" 
+              id="input-reg-name" 
+              class="form-control" 
+              placeholder="Ex: Restaurante Kianda, Café Central..." 
+              required
+            >
+          </div>
+
+          <!-- E-mail Corporativo -->
+          <div class="form-group">
+            <label for="input-reg-email" class="form-label">
+              E-mail de Contato <span class="required">*</span>
+            </label>
+            <input 
+              type="email" 
+              id="input-reg-email" 
+              class="form-control" 
+              placeholder="contato@seurestaurante.ao" 
+              autocomplete="email" 
+              required
+            >
+          </div>
+
+          <!-- Telefone / WhatsApp -->
+          <div class="form-group">
+            <label for="input-reg-phone" class="form-label">
+              Telefone / WhatsApp Comercial <span class="required">*</span>
+            </label>
+            <input 
+              type="tel" 
+              id="input-reg-phone" 
+              class="form-control" 
+              placeholder="+244 923 000 111" 
+              autocomplete="tel" 
+              required
+            >
+            <span class="form-helper">Utilizado para confirmações operacionais e segurança da conta.</span>
+          </div>
+
+          <!-- Localização -->
+          <div class="form-group">
+            <label for="input-reg-location" class="form-label">
+              Localização / Cidade & Província <span class="required">*</span>
+            </label>
+            <input 
+              type="text" 
+              id="input-reg-location" 
+              class="form-control" 
+              placeholder="Ex: Avenida 4 de Fevereiro, Luanda" 
+              required
+            >
+          </div>
+
+          <!-- Senha com Medidor de Força -->
+          <div class="form-group">
+            <label for="input-reg-password" class="form-label">
+              Criar Senha de Acesso <span class="required">*</span>
+            </label>
+            <div class="input-group">
+              <input 
+                type="password" 
+                id="input-reg-password" 
+                class="form-control" 
+                placeholder="Mínimo 8 caracteres (letras e números)" 
+                autocomplete="new-password" 
+                required
+              >
+              <button type="button" id="btn-toggle-reg-pass" class="btn btn-secondary btn-icon" title="Mostrar/ocultar senha">
+                <span data-icon="user" data-icon-size="16"></span>
+              </button>
+            </div>
+            
+            <!-- Barra de Força da Senha -->
+            <div class="password-strength-container">
+              <div class="password-strength-bar">
+                <div id="password-strength-meter" class="password-strength-fill"></div>
+              </div>
+              <span id="password-strength-hint" class="password-strength-label">A senha deve ter pelo menos 8 caracteres.</span>
+            </div>
+          </div>
+
+          <!-- Botão de Ação -->
+          <button type="submit" id="btn-submit-register" class="btn btn-primary btn-lg btn-full mt-4">
+            <span>Avançar para Configuração</span>
+            <span data-icon="chevronRight" data-icon-size="16"></span>
+          </button>
+
+          <!-- Link para Login -->
+          <p class="auth-switch-link">
+            Já tem uma conta cadastrada? <a href="../login/index.html">Entrar</a>
+          </p>
+
+        </form>
+
+      </div>
+    </main>
+
+    <!-- Lado Direito: Showcase -->
+    <aside class="auth-showcase-column">
+      <div class="auth-showcase-content">
+        
+        <div>
+          <h2 class="auth-showcase-headline">Comece a transformar a gestão do seu restaurante</h2>
+          <p class="auth-showcase-subtext">Configuração em minutos para começar a receber pedidos por mesa imediatamente.</p>
+        </div>
+
+        <div class="auth-benefit-list">
+          
+          <div class="auth-benefit-item">
+            <div class="auth-benefit-icon-wrapper">
+              <span data-icon="qr" data-icon-size="22"></span>
+            </div>
+            <div class="auth-benefit-text-group">
+              <h3 class="auth-benefit-title">QR Codes Únicos por Mesa</h3>
+              <p class="auth-benefit-desc">Gere e imprima QR codes automáticos para cada mesa com identificação rápida de clientes.</p>
+            </div>
+          </div>
+
+          <div class="auth-benefit-item">
+            <div class="auth-benefit-icon-wrapper">
+              <span data-icon="analytics" data-icon-size="22"></span>
+            </div>
+            <div class="auth-benefit-text-group">
+              <h3 class="auth-benefit-title">Métricas de Vendas & Pico</h3>
+              <p class="auth-benefit-desc">Descubra os horários de maior movimento para planejar turnos de equipes e preparação de estoque.</p>
+            </div>
+          </div>
+
+          <div class="auth-benefit-item">
+            <div class="auth-benefit-icon-wrapper">
+              <span data-icon="coupons" data-icon-size="22"></span>
+            </div>
+            <div class="auth-benefit-text-group">
+              <h3 class="auth-benefit-title">Campanhas e Cupons</h3>
+              <p class="auth-benefit-desc">Configure cupons de desconto automáticos de boas-vindas e fidelização contínua.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="../../assets/script/icons.js"></script>
+  <script src="../../utils/function/useAlert.js"></script>
+  <script src="../../utils/functions/useFormatters.js"></script>
+  <script src="../../utils/functions/useValidation.js"></script>
+  <script src="../../utils/functions/useApi.js"></script>
+  <script src="../../assets/script/auth-register.js"></script>
+</body>
+</html>

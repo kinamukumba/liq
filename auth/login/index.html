@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar | LIQ SAAS Restaurantes</title>
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+
+  <!-- Estilos Externos (Sem CSS interno nem inline) -->
+  <link rel="stylesheet" href="../../assets/style/global.css">
+  <link rel="stylesheet" href="../../assets/style/components.css">
+  <link rel="stylesheet" href="../../assets/style/auth.css">
+</head>
+<body>
+
+  <div class="auth-split-wrapper">
+    
+    <!-- Lado Esquerdo: Formulário de Autenticação -->
+    <main class="auth-form-column">
+      <div class="auth-form-card">
+        
+        <header>
+          <a href="../../index.html">
+            <img src="../../assets/images/logo.png" alt="LIQ SAAS" class="auth-brand-logo">
+          </a>
+          <h1 class="auth-title">Acesse a sua conta</h1>
+          <p class="auth-subtitle">Painel operacional, pedidos em tempo real e analytics do restaurante.</p>
+        </header>
+
+        <form id="form-login" novalidate>
+          
+          <!-- Campo E-mail com Super Verificação -->
+          <div class="form-group">
+            <label for="input-login-email" class="form-label">
+              E-mail do Restaurante <span class="required">*</span>
+            </label>
+            <input 
+              type="email" 
+              id="input-login-email" 
+              class="form-control" 
+              placeholder="gestor@restaurante.ao" 
+              autocomplete="email" 
+              required
+            >
+          </div>
+
+          <!-- Campo Senha -->
+          <div class="form-group">
+            <div class="d-flex justify-between items-center mb-1">
+              <label for="input-login-password" class="form-label m-0">
+                Senha de Acesso <span class="required">*</span>
+              </label>
+              <a href="../resend/index.html" class="text-xs text-green font-medium">Esqueceu a senha?</a>
+            </div>
+            <div class="input-group">
+              <input 
+                type="password" 
+                id="input-login-password" 
+                class="form-control" 
+                placeholder="Sua senha segura" 
+                autocomplete="current-password" 
+                required
+              >
+              <button type="button" id="btn-toggle-password" class="btn btn-secondary btn-icon" title="Mostrar/ocultar senha">
+                <span data-icon="user" data-icon-size="16"></span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Box de Segurança Conforme Identidade Visual -->
+          <div class="auth-security-box">
+            <div class="auth-security-icon">
+              <span data-icon="check" data-icon-size="12"></span>
+            </div>
+            <div class="auth-security-text">
+              <strong>Proteção de Sessão Ativa</strong>
+              Conexão criptografada e proteção contra invasões.
+            </div>
+          </div>
+
+          <!-- Botão de Ação -->
+          <button type="submit" id="btn-submit-login" class="btn btn-primary btn-lg btn-full">
+            <span>Acessar Painel</span>
+            <span data-icon="chevronRight" data-icon-size="16"></span>
+          </button>
+
+          <!-- Link Alternativo -->
+          <p class="auth-switch-link">
+            Não tem uma conta? <a href="../register/index.html">Cadastre o seu restaurante</a>
+          </p>
+
+        </form>
+
+      </div>
+    </main>
+
+    <!-- Lado Direito: Showcase de Recursos & Benefícios -->
+    <aside class="auth-showcase-column">
+      <div class="auth-showcase-content">
+        
+        <div>
+          <h2 class="auth-showcase-headline">Tecnologia completa para atendimento e fidelização</h2>
+          <p class="auth-showcase-subtext">Elimine filas, agilize pedidos nas mesas e aumente o ticket médio do seu restaurante.</p>
+        </div>
+
+        <div class="auth-benefit-list">
+          
+          <div class="auth-benefit-item">
+            <div class="auth-benefit-icon-wrapper">
+              <span data-icon="qr" data-icon-size="22"></span>
+            </div>
+            <div class="auth-benefit-text-group">
+              <h3 class="auth-benefit-title">Cardápio Digital & QR Code</h3>
+              <p class="auth-benefit-desc">Seus clientes visualizam o menu, fotos e preços atualizados no telemóvel sem instalar nenhum aplicativo.</p>
+            </div>
+          </div>
+
+          <div class="auth-benefit-item">
+            <div class="auth-benefit-icon-wrapper">
+              <span data-icon="orders" data-icon-size="22"></span>
+            </div>
+            <div class="auth-benefit-text-group">
+              <h3 class="auth-benefit-title">Quadro Operacional KDS</h3>
+              <p class="auth-benefit-desc">Pedidos enviados diretamente da mesa para a cozinha com controle rigoroso de tempo de preparo.</p>
+            </div>
+          </div>
+
+          <div class="auth-benefit-item">
+            <div class="auth-benefit-icon-wrapper">
+              <span data-icon="loyalty" data-icon-size="22"></span>
+            </div>
+            <div class="auth-benefit-text-group">
+              <h3 class="auth-benefit-title">Fidelização & CRM Inteligente</h3>
+              <p class="auth-benefit-desc">Reconhecimento automático de clientes recorrentes, acúmulo de pontos e campanhas com cupons exclusivos.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="../../assets/script/icons.js"></script>
+  <script src="../../utils/function/useAlert.js"></script>
+  <script src="../../utils/functions/useFormatters.js"></script>
+  <script src="../../utils/functions/useValidation.js"></script>
+  <script src="../../utils/functions/useApi.js"></script>
+  <script src="../../assets/script/auth-login.js"></script>
+</body>
+</html>

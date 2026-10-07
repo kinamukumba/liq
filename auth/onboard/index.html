@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configuração do Restaurante | LIQ SAAS</title>
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+
+  <!-- Estilos Externos (Sem CSS interno nem inline) -->
+  <link rel="stylesheet" href="../../assets/style/global.css">
+  <link rel="stylesheet" href="../../assets/style/components.css">
+  <link rel="stylesheet" href="../../assets/style/auth.css">
+</head>
+<body>
+
+  <div class="auth-split-wrapper">
+    
+    <!-- Lado Esquerdo: Formulário de Onboarding -->
+    <main class="auth-form-column">
+      <div class="auth-form-card">
+        
+        <header>
+          <a href="../../index.html">
+            <img src="../../assets/images/logo.png" alt="LIQ SAAS" class="auth-brand-logo">
+          </a>
+          <div class="onboard-step-pill">Etapa 2 de 3 &bull; Perfil Operacional</div>
+          
+          <div class="onboard-progress-bar">
+            <div class="onboard-progress-fill progress-66"></div>
+          </div>
+
+          <h1 class="auth-title">Personalize a sua plataforma</h1>
+          <p class="auth-subtitle">Configure as opções iniciais para adequar o sistema ao perfil do seu restaurante.</p>
+        </header>
+
+        <form id="form-onboard" novalidate>
+          
+          <!-- Pergunta 1: Sistema de Gestão Atual -->
+          <div class="form-group">
+            <label class="form-label">
+              O seu restaurante já utiliza algum sistema de gestão / PDV atualmente? <span class="required">*</span>
+            </label>
+            <div class="onboard-options-grid" id="group-pos-system">
+              
+              <div class="onboard-choice-card" data-val="none">
+                <div>
+                  <div class="font-semibold text-sm">Não utilizamos</div>
+                  <div class="text-xs text-muted">Controle manual ou em papel</div>
+                </div>
+                <div class="choice-radio-circle"><div class="choice-radio-dot"></div></div>
+              </div>
+
+              <div class="onboard-choice-card selected" data-val="traditional">
+                <div>
+                  <div class="font-semibold text-sm">Sim, temos um PDV tradicional</div>
+                  <div class="text-xs text-muted">Buscamos integrar ou substituir por pedidos digitais</div>
+                </div>
+                <div class="choice-radio-circle"><div class="choice-radio-dot"></div></div>
+              </div>
+
+              <div class="onboard-choice-card" data-val="starting">
+                <div>
+                  <div class="font-semibold text-sm">Novo estabelecimento</div>
+                  <div class="text-xs text-muted">Iniciando a operação do zero</div>
+                </div>
+                <div class="choice-radio-circle"><div class="choice-radio-dot"></div></div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Pergunta 2: Capacidade de Mesas -->
+          <div class="form-group">
+            <label for="select-tables-capacity" class="form-label">
+              Quantas mesas ou áreas de atendimento o restaurante possui? <span class="required">*</span>
+            </label>
+            <select id="select-tables-capacity" class="form-select" required>
+              <option value="">Selecione uma faixa de mesas...</option>
+              <option value="1-10">1 a 10 mesas (Porte Pequeno / Cafetaria)</option>
+              <option value="11-30" selected>11 a 30 mesas (Porte Médio)</option>
+              <option value="31-60">31 a 60 mesas (Porte Grande)</option>
+              <option value="60+">Mais de 60 mesas (Multi-ambientes / Eventos)</option>
+            </select>
+          </div>
+
+          <!-- Pergunta 3: Segmento Culinário -->
+          <div class="form-group">
+            <label for="select-cuisine-type" class="form-label">
+              Qual é o segmento principal do estabelecimento? <span class="required">*</span>
+            </label>
+            <select id="select-cuisine-type" class="form-select" required>
+              <option value="">Selecione o segmento...</option>
+              <option value="restaurant" selected>Restaurante Geral & Pratos Típicos</option>
+              <option value="cafeteria">Cafetaria, Padaria & Pastelaria</option>
+              <option value="fastfood">Hamburgueria & Fast Food</option>
+              <option value="bar">Bar, Lounge & Petiscaria</option>
+              <option value="other">Outro formato gastronômico</option>
+            </select>
+          </div>
+
+          <!-- Pergunta 4: Fidelização e Cupons -->
+          <div class="form-group">
+            <label class="form-label">
+              Deseja ativar o programa de pontos e cupons de boas-vindas na mesa?
+            </label>
+            <div class="onboard-options-grid" id="group-loyalty-activation">
+              
+              <div class="onboard-choice-card selected" data-val="active">
+                <div>
+                  <div class="font-semibold text-sm">Sim, ativar Fidelização & Cupons</div>
+                  <div class="text-xs text-muted">Recomendado para retenção e aumento de ticket médio</div>
+                </div>
+                <div class="choice-radio-circle"><div class="choice-radio-dot"></div></div>
+              </div>
+
+              <div class="onboard-choice-card" data-val="basic">
+                <div>
+                  <div class="font-semibold text-sm">Apenas Menu Digital por enquanto</div>
+                  <div class="text-xs text-muted">Pode ser ativado a qualquer momento no painel</div>
+                </div>
+                <div class="choice-radio-circle"><div class="choice-radio-dot"></div></div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Botão de Submissão -->
+          <button type="submit" id="btn-submit-onboard" class="btn btn-primary btn-lg btn-full mt-3">
+            <span>Concluir e Enviar Código OTP</span>
+            <span data-icon="chevronRight" data-icon-size="16"></span>
+          </button>
+
+        </form>
+
+      </div>
+    </main>
+
+    <!-- Lado Direito: Showcase -->
+    <aside class="auth-showcase-column">
+      <div class="auth-showcase-content">
+        
+        <div>
+          <h2 class="auth-showcase-headline">Configuração sob medida para a sua operação</h2>
+          <p class="auth-showcase-subtext">Adaptamos os relatórios, status de mesas e telas da cozinha conforme o tamanho do seu negócio.</p>
+        </div>
+
+        <div class="auth-benefit-list">
+          
+          <div class="auth-benefit-item">
+            <div class="auth-benefit-icon-wrapper">
+              <span data-icon="tables" data-icon-size="22"></span>
+            </div>
+            <div class="auth-benefit-text-group">
+              <h3 class="auth-benefit-title">Mesas e Áreas Personalizadas</h3>
+              <p class="auth-benefit-desc">Numeração de mesas, áreas VIP, esplanadas e balcão com identificação automática.</p>
+            </div>
+          </div>
+
+          <div class="auth-benefit-item">
+            <div class="auth-benefit-icon-wrapper">
+              <span data-icon="clock" data-icon-size="22"></span>
+            </div>
+            <div class="auth-benefit-text-group">
+              <h3 class="auth-benefit-title">Monitoramento de SLA de Cozinha</h3>
+              <p class="auth-benefit-desc">Acompanhe quanto tempo leva cada pedido desde a leitura do QR até a entrega na mesa.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="../../assets/script/icons.js"></script>
+  <script src="../../utils/function/useAlert.js"></script>
+  <script src="../../utils/functions/useFormatters.js"></script>
+  <script src="../../utils/functions/useValidation.js"></script>
+  <script src="../../utils/functions/useApi.js"></script>
+  <script src="../../assets/script/auth-onboard.js"></script>
+</body>
+</html>

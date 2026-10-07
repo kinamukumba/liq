@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel do Restaurante | LIQ SAAS</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+  <!-- Estilos Externos Estritos (Sem CSS interno nem inline) -->
+  <link rel="stylesheet" href="../assets/style/global.css">
+  <link rel="stylesheet" href="../assets/style/components.css">
+  <link rel="stylesheet" href="../assets/style/user.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    
+    <!-- Sidebar Oficial -->
+    <aside class="app-sidebar">
+      <div class="app-sidebar-header">
+        <div class="sidebar-brand-wrapper">
+          <img src="../assets/images/logo-white.png" alt="LIQ" class="brand-logo-img">
+        </div>
+        <span class="sidebar-brand-tag">SaaS</span>
+      </div>
+
+      <nav class="app-sidebar-nav">
+        <div class="nav-section-title">Operação do Restaurante</div>
+        <button type="button" class="nav-link active" data-target-panel="panel-dashboard">
+          <span class="nav-icon" data-icon="dashboard"></span>
+          <span>Visão Geral</span>
+        </button>
+        <button type="button" class="nav-link" data-target-panel="panel-kitchen">
+          <span class="nav-icon" data-icon="clock"></span>
+          <span>Pedidos em Tempo Real</span>
+        </button>
+        <button type="button" class="nav-link" data-target-panel="panel-tables">
+          <span class="nav-icon" data-icon="tables"></span>
+          <span>Gestão de Mesas</span>
+        </button>
+
+        <div class="nav-section-title">Clientes & Campanhas</div>
+        <button type="button" class="nav-link" data-target-panel="panel-crm">
+          <span class="nav-icon" data-icon="customers"></span>
+          <span>Clientes & CRM</span>
+        </button>
+        <button type="button" class="nav-link" data-target-panel="panel-coupons">
+          <span class="nav-icon" data-icon="coupons"></span>
+          <span>Cupons & Campanhas</span>
+        </button>
+      </nav>
+
+      <div class="app-sidebar-footer">
+        <div class="user-profile-badge">
+          <div class="user-avatar-initials">GC</div>
+          <div class="user-details">
+            <div class="user-name">Gestor Central</div>
+            <div class="user-role">Restaurateur (Owner)</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Área Principal de Conteúdo -->
+    <div class="app-main">
+      
+      <!-- Cabeçalho Superior -->
+      <header class="app-header">
+        <div class="header-title-group">
+          <h1 id="page-header-title">Visão Geral & Indicadores</h1>
+          <p class="text-muted">Café Central &bull; Sistema Multi-Tenant</p>
+        </div>
+
+        <div class="header-actions">
+          <span class="badge badge-ready">
+            <span class="badge-dot"></span> Operação Ativa
+          </span>
+          <button type="button" id="btn-manual-refresh" class="btn btn-secondary btn-sm">
+            <span data-icon="refresh" data-icon-size="14"></span>
+            Atualizar
+          </button>
+          <a href="../client/index.html?t=07" target="_blank" class="btn btn-outline btn-sm">
+            <span data-icon="qr" data-icon-size="14"></span>
+            Simular Mesa 07
+          </a>
+        </div>
+      </header>
+
+      <!-- Conteúdo com Painéis Chaveáveis via usePanels -->
+      <main class="app-content">
+
+        <!-- PAINEL 1: DASHBOARD & INDICADORES -->
+        <section id="panel-dashboard" class="tab-panel active">
+          
+          <!-- KPIs de Vendas & Clientes -->
+          <div class="metrics-grid">
+            <div class="card-metric">
+              <span class="card-metric-label">Vendas Hoje</span>
+              <span class="card-metric-value text-green" id="kpi-sales-today">0,00 Kz</span>
+              <span class="card-metric-trend trend-neutral" id="kpi-growth">Aguardando dados</span>
+            </div>
+
+            <div class="card-metric">
+              <span class="card-metric-label">Pedidos Hoje</span>
+              <span class="card-metric-value" id="kpi-orders-today">0</span>
+              <span class="card-metric-trend text-light">Ciclo diário</span>
+            </div>
+
+            <div class="card-metric">
+              <span class="card-metric-label">Ticket Médio</span>
+              <span class="card-metric-value" id="kpi-avg-ticket">0,00 Kz</span>
+              <span class="card-metric-trend text-light">Por pedido concluído</span>
+            </div>
+
+            <div class="card-metric">
+              <span class="card-metric-label">Clientes Únicos</span>
+              <span class="card-metric-value" id="kpi-total-clients">0</span>
+              <span class="card-metric-trend trend-up" id="kpi-return-rate">0% recorrentes</span>
+            </div>
+          </div>
+
+          <!-- Distribuição dos Pedidos -->
+          <div class="card mb-6">
+            <div class="card-header">
+              <span class="card-title">Distribuição dos Pedidos de Hoje</span>
+              <div id="tables-summary-stat"></div>
+            </div>
+            <div class="card-body">
+              <div id="orders-status-pills" class="d-flex flex-wrap gap-2"></div>
+            </div>
+          </div>
+
+          <!-- Grid Dividido: Ranking de Produtos e Horários de Pico -->
+          <div class="dashboard-split-grid">
+            
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Produtos Mais Vendidos</h2>
+                  <div class="card-subtitle">Ranking por volume de itens consumidos</div>
+                </div>
+                <span data-icon="products" data-icon-size="18"></span>
+              </div>
+              <div class="card-body" id="top-products-list"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Horários de Pico</h2>
+                  <div class="card-subtitle">Volume de pedidos por hora do dia</div>
+                </div>
+                <span data-icon="analytics" data-icon-size="18"></span>
+              </div>
+              <div class="card-body" id="peak-hours-chart"></div>
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- PAINEL 2: PEDIDOS EM TEMPO REAL (KDS) -->
+        <section id="panel-kitchen" class="tab-panel">
+          <div class="d-flex justify-between items-center mb-4">
+            <div>
+              <h2 class="text-md font-bold">Quadro Operacional de Pedidos (KDS)</h2>
+              <p class="text-sm text-muted">Pedidos ativos em fluxo contínuo. Atualização automática a cada 10 segundos.</p>
+            </div>
+          </div>
+
+          <div id="kitchen-orders-grid" class="kds-grid"></div>
+        </section>
+
+        <!-- PAINEL 3: GESTÃO DE MESAS -->
+        <section id="panel-tables" class="tab-panel">
+          <div class="mb-4">
+            <h2 class="text-md font-bold">Mesas Cadastradas & Códigos de Acesso</h2>
+            <p class="text-sm text-muted">Cada mesa possui identificador único e QR Code exclusivo para acesso do cliente.</p>
+          </div>
+
+          <div class="tables-grid">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <span class="card-title">Mesa 01</span>
+                  <div class="card-subtitle">Código: T01</div>
+                </div>
+                <span class="badge badge-available">Disponível</span>
+              </div>
+              <div class="card-body">
+                <p class="text-xs text-muted">URL Pública Segura:</p>
+                <p class="text-xs font-medium text-green mt-1">/client/index.html?t=01</p>
+              </div>
+              <div class="card-footer">
+                <a href="../client/index.html?t=01" target="_blank" class="btn btn-sm btn-secondary">Abrir Menu</a>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <span class="card-title">Mesa 02</span>
+                  <div class="card-subtitle">Código: T02</div>
+                </div>
+                <span class="badge badge-available">Disponível</span>
+              </div>
+              <div class="card-body">
+                <p class="text-xs text-muted">URL Pública Segura:</p>
+                <p class="text-xs font-medium text-green mt-1">/client/index.html?t=02</p>
+              </div>
+              <div class="card-footer">
+                <a href="../client/index.html?t=02" target="_blank" class="btn btn-sm btn-secondary">Abrir Menu</a>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <span class="card-title">Mesa 03</span>
+                  <div class="card-subtitle">Código: T03</div>
+                </div>
+                <span class="badge badge-available">Disponível</span>
+              </div>
+              <div class="card-body">
+                <p class="text-xs text-muted">URL Pública Segura:</p>
+                <p class="text-xs font-medium text-green mt-1">/client/index.html?t=03</p>
+              </div>
+              <div class="card-footer">
+                <a href="../client/index.html?t=03" target="_blank" class="btn btn-sm btn-secondary">Abrir Menu</a>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <span class="card-title">Mesa 07 (Oficial)</span>
+                  <div class="card-subtitle">Código: T07</div>
+                </div>
+                <span class="badge badge-ready">Ativa</span>
+              </div>
+              <div class="card-body">
+                <p class="text-xs text-muted">URL Pública Segura:</p>
+                <p class="text-xs font-medium text-green mt-1">/client/index.html?t=07</p>
+              </div>
+              <div class="card-footer">
+                <a href="../client/index.html?t=07" target="_blank" class="btn btn-sm btn-primary">Abrir Menu Mesa 07</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PAINEL 4: CRM DE CLIENTES -->
+        <section id="panel-crm" class="tab-panel">
+          <div class="mb-4">
+            <h2 class="text-md font-bold">Base de Clientes & CRM</h2>
+            <p class="text-sm text-muted">Reconhecimento persistente, retenção e histórico de pedidos por cliente.</p>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Cliente</th>
+                  <th>Telefone / WhatsApp</th>
+                  <th>Status</th>
+                  <th>Último Pedido</th>
+                </tr>
+              </thead>
+              <tbody id="crm-table-tbody">
+                <tr>
+                  <td class="font-medium">Kina</td>
+                  <td>+244 923 123 456</td>
+                  <td><span class="badge badge-ready">Ativo</span></td>
+                  <td>Hoje</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- PAINEL 5: CUPONS & CAMPANHAS -->
+        <section id="panel-coupons" class="tab-panel">
+          <div class="mb-4">
+            <h2 class="text-md font-bold">Cupons & Campanhas Promocionais</h2>
+            <p class="text-sm text-muted">Regras validadas estritamente no servidor.</p>
+          </div>
+
+          <div class="tables-grid">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <span class="card-title">BEMVINDO10</span>
+                  <div class="card-subtitle">Cupom Percentual</div>
+                </div>
+                <span class="badge badge-ready">Ativo</span>
+              </div>
+              <div class="card-body">
+                <div class="d-flex flex-col gap-1 text-xs">
+                  <div><strong>Desconto:</strong> 10%</div>
+                  <div><strong>Pedido Mínimo:</strong> 2.500,00 Kz</div>
+                  <div><strong>Desconto Máximo:</strong> 1.500,00 Kz</div>
+                  <div><strong>Limite por Cliente:</strong> 1 uso</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <span class="card-title">DESCONTO1000</span>
+                  <div class="card-subtitle">Cupom Valor Fixo</div>
+                </div>
+                <span class="badge badge-ready">Ativo</span>
+              </div>
+              <div class="card-body">
+                <div class="d-flex flex-col gap-1 text-xs">
+                  <div><strong>Desconto:</strong> 1.000,00 Kz</div>
+                  <div><strong>Pedido Mínimo:</strong> 5.000,00 Kz</div>
+                  <div><strong>Limite por Cliente:</strong> 1 uso</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <!-- Scripts Estruturados (Sem CSS interno nem inline) -->
+  <script src="../assets/script/icons.js"></script>
+  <script src="../utils/function/useAlert.js"></script>
+  <script src="../utils/functions/useFormatters.js"></script>
+  <script src="../utils/functions/useApi.js"></script>
+  <script src="../utils/functions/usePanels.js"></script>
+  <script src="../assets/script/user.js"></script>
+</body>
+</html>

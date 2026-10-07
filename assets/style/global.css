@@ -1,0 +1,309 @@
+/**
+ * ====================================================================
+ * LIQ SAAS - GLOBAL STYLESHEET (global.css)
+ * Padrão Master de Cores, Tipografia, Reset e Utilitários Estruturais
+ * ====================================================================
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root {
+  /* 1. Paleta Oficial Fornecida */
+  --c-neon-green:   #06f956;
+  --c-dark-forest:  #032204;
+  --c-mint-light:   #e0fae9;
+  --c-emerald:      #149036;
+  --c-leaf-green:   #26cd59;
+  --c-deep-green:   #024d10;
+  --c-pastel-green: #95efb3;
+
+  /* 2. Variáveis Semânticas Mapeadas (Com Fallbacks Sólidos) */
+  --color-primary:          #149036;
+  --color-primary-hover:    #024d10;
+  --color-primary-active:   #012b08;
+  --color-primary-focus:    rgba(38, 205, 89, 0.45);
+
+  --color-accent:           #26cd59;
+  --color-accent-bright:    #06f956;
+  --color-accent-subtle:    #95efb3;
+
+  --color-bg-app:           #f7faf8;
+  --color-bg-surface:       #ffffff;
+  --color-bg-subtle:        #e0fae9;
+  --color-bg-dark:          #032204;
+
+  --color-text-main:        #032204;
+  --color-text-muted:       #37513b;
+  --color-text-light:       #647a68;
+  --color-text-white:       #ffffff;
+
+  --color-border-subtle:    #d9ebd9;
+  --color-border-strong:    #95efb3;
+  --color-border-dark:      #024d10;
+
+  /* Status */
+  --color-status-success-bg:     #eaf8ee;
+  --color-status-success-text:   #0d6e27;
+  --color-status-success-border: #92d9a3;
+
+  --color-status-warning-bg:     #fff9e6;
+  --color-status-warning-text:   #8a6100;
+  --color-status-warning-border: #f2d480;
+
+  --color-status-danger-bg:      #fdf0f0;
+  --color-status-danger-text:    #a81c1c;
+  --color-status-danger-border:  #f3b1b1;
+
+  --color-status-info-bg:        #eff6ff;
+  --color-status-info-text:      #1d4ed8;
+  --color-status-info-border:    #bfdbfe;
+
+  /* Tipografia Oficial (Open Sans) */
+  --font-sans: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+  --font-size-xs:   0.75rem;    /* 12px */
+  --font-size-sm:   0.84375rem; /* 13.5px */
+  --font-size-base: 0.9375rem;  /* 15px */
+  --font-size-md:   1.0625rem;  /* 17px */
+  --font-size-lg:   1.25rem;    /* 20px */
+  --font-size-xl:   1.5rem;     /* 24px */
+  --font-size-2xl:  1.875rem;   /* 30px */
+
+  --font-weight-regular: 400;
+  --font-weight-medium:  500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:    700;
+
+  --line-height-tight:  1.25;
+  --line-height-normal: 1.5;
+
+  /* Espaçamentos Fixos */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.25rem;  /* 20px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-10: 2.5rem;  /* 40px */
+  --space-12: 3rem;    /* 48px */
+
+  /* Raios de Borda */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+
+  /* Sombras Sutis (Sem exagero) */
+  --shadow-none: none;
+  --shadow-xs:   0 1px 2px rgba(3, 34, 4, 0.04);
+  --shadow-sm:   0 1px 3px rgba(3, 34, 4, 0.07), 0 1px 2px rgba(3, 34, 4, 0.04);
+  --shadow-md:   0 3px 6px -1px rgba(3, 34, 4, 0.08);
+  --shadow-dropdown: 0 4px 12px rgba(3, 34, 4, 0.12);
+
+  /* Transições */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Alturas de Controle */
+  --control-height-sm: 32px;
+  --control-height-md: 40px;
+  --control-height-lg: 46px;
+}
+
+/* ----------------------------------------------------
+   RESET & PADRÃO GLOBAL
+   ---------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: var(--line-height-normal);
+  color: var(--color-text-main);
+  background-color: var(--color-bg-app);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-main);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+}
+
+h1 { font-size: var(--font-size-2xl); }
+h2 { font-size: var(--font-size-xl); }
+h3 { font-size: var(--font-size-lg); }
+h4 { font-size: var(--font-size-md); }
+h5 { font-size: var(--font-size-base); }
+h6 { font-size: var(--font-size-sm); }
+
+p {
+  color: var(--color-text-muted);
+}
+
+small {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-light);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img, svg {
+  vertical-align: middle;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ----------------------------------------------------
+   CLASSES UTILITÁRIAS (Substitutos de CSS inline)
+   ---------------------------------------------------- */
+.d-none { display: none !important; }
+.d-block { display: block !important; }
+.d-flex { display: flex !important; }
+.d-grid { display: grid !important; }
+
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.justify-end { justify-content: flex-end; }
+.flex-1 { flex: 1; }
+.flex-wrap { flex-wrap: wrap; }
+
+.gap-1 { gap: var(--space-1); }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+
+.w-100 { width: 100%; }
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+.text-xs { font-size: var(--font-size-xs); }
+.text-sm { font-size: var(--font-size-sm); }
+.text-base { font-size: var(--font-size-base); }
+.text-md { font-size: var(--font-size-md); }
+.text-lg { font-size: var(--font-size-lg); }
+
+.text-main { color: var(--color-text-main); }
+.text-muted { color: var(--color-text-muted); }
+.text-light { color: var(--color-text-light); }
+.text-white { color: var(--color-text-white); }
+.text-green { color: var(--color-primary); }
+.text-dark-green { color: var(--color-border-dark); }
+.text-danger { color: #dc2626; }
+
+.p-0 { padding: 0; }
+.p-2 { padding: var(--space-2); }
+.p-3 { padding: var(--space-3); }
+.p-4 { padding: var(--space-4); }
+.p-5 { padding: var(--space-5); }
+.p-6 { padding: var(--space-6); }
+
+.pt-2 { padding-top: var(--space-2); }
+.pt-3 { padding-top: var(--space-3); }
+.pt-4 { padding-top: var(--space-4); }
+.pb-2 { padding-bottom: var(--space-2); }
+.pb-3 { padding-bottom: var(--space-3); }
+.pb-4 { padding-bottom: var(--space-4); }
+
+.m-0 { margin: 0; }
+.mt-1 { margin-top: var(--space-1); }
+.mt-2 { margin-top: var(--space-2); }
+.mt-3 { margin-top: var(--space-3); }
+.mt-4 { margin-top: var(--space-4); }
+.mb-1 { margin-bottom: var(--space-1); }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-3 { margin-bottom: var(--space-3); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-6 { margin-bottom: var(--space-6); }
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+.brand-logo-img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-favicon-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.brand-hero-logo {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+}
+
+.portal-header {
+  background-color: var(--color-bg-dark);
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: var(--space-8) var(--space-4);
+}
+
+.portal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-6);
+  padding: var(--space-8) 0;
+}
+
+.standards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+}

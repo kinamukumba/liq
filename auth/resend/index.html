@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redefinir Senha | LIQ SAAS</title>
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+
+  <!-- Estilos Externos (Sem CSS interno nem inline) -->
+  <link rel="stylesheet" href="../../assets/style/global.css">
+  <link rel="stylesheet" href="../../assets/style/components.css">
+  <link rel="stylesheet" href="../../assets/style/auth.css">
+</head>
+<body>
+
+  <div class="auth-split-wrapper">
+    
+    <!-- Lado Esquerdo: Formulário de Redefinição -->
+    <main class="auth-form-column">
+      <div class="auth-form-card">
+        
+        <header>
+          <a href="../../index.html">
+            <img src="../../assets/images/logo.png" alt="LIQ SAAS" class="auth-brand-logo">
+          </a>
+          
+          <div class="onboard-step-pill">Recuperação de Acesso</div>
+          
+          <h1 class="auth-title">Redefinir sua senha</h1>
+          <p class="auth-subtitle">
+            Informe o e-mail institucional associado ao restaurante. Se estiver registrado, enviaremos um link de validação seguro com validade de 10 minutos.
+          </p>
+        </header>
+
+        <!-- Box de Sucesso de Envio -->
+        <div id="resend-success-box" class="alert alert-success d-none" role="alert">
+          <span data-icon="check" data-icon-size="16"></span>
+          <div>
+            <strong>Link de verificação emitido com sucesso!</strong>
+            <p class="text-xs mt-1">O link com token de segurança possui validade estrita de 10 minutos.</p>
+            <div class="mt-2">
+              <a href="#" id="link-simulate-email-click" class="btn btn-sm btn-primary">
+                Acessar Link de Redefinição
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <form id="form-resend" novalidate>
+          
+          <!-- Campo E-mail -->
+          <div class="form-group">
+            <label for="input-resend-email" class="form-label">
+              E-mail Cadastrado do Restaurante <span class="required">*</span>
+            </label>
+            <input 
+              type="email" 
+              id="input-resend-email" 
+              class="form-control" 
+              placeholder="admin@cafecentral.ao" 
+              autocomplete="email" 
+              required
+            >
+            <span class="form-helper">A plataforma só emitirá o token se o endereço constar na base ativa.</span>
+          </div>
+
+          <!-- Botão de Ação -->
+          <button type="submit" id="btn-submit-resend" class="btn btn-primary btn-lg btn-full mt-3">
+            <span>Verificar e Enviar Link</span>
+            <span data-icon="chevronRight" data-icon-size="16"></span>
+          </button>
+
+          <!-- Link de Retorno -->
+          <p class="auth-switch-link">
+            Lembrou da senha? <a href="../login/index.html">Voltar ao login</a>
+          </p>
+
+        </form>
+
+      </div>
+    </main>
+
+    <!-- Lado Direito: Showcase -->
+    <aside class="auth-showcase-column">
+      <div class="auth-showcase-content">
+        
+        <div>
+          <h2 class="auth-showcase-headline">Segurança e Proteção de Contas</h2>
+          <p class="auth-showcase-subtext">Protocolos rígidos de segurança para evitar acessos não autorizados ao painel financeiro.</p>
+        </div>
+
+        <div class="auth-benefit-list">
+          
+          <div class="auth-benefit-item">
+            <div class="auth-benefit-icon-wrapper">
+              <span data-icon="clock" data-icon-size="22"></span>
+            </div>
+            <div class="auth-benefit-text-group">
+              <h3 class="auth-benefit-title">Tokens com Validade Estrita</h3>
+              <p class="auth-benefit-desc">Links de redefinição possuem expiração máxima de 10 minutos e uso único para proteção máxima.</p>
+            </div>
+          </div>
+
+          <div class="auth-benefit-item">
+            <div class="auth-benefit-icon-wrapper">
+              <span data-icon="check" data-icon-size="22"></span>
+            </div>
+            <div class="auth-benefit-text-group">
+              <h3 class="auth-benefit-title">Zero Exposição de Dados</h3>
+              <p class="auth-benefit-desc">Nenhuma informação confidencial do restaurante é exposta antes da autenticação e confirmação de identidade.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="../../assets/script/icons.js"></script>
+  <script src="../../utils/function/useAlert.js"></script>
+  <script src="../../utils/functions/useFormatters.js"></script>
+  <script src="../../utils/functions/useValidation.js"></script>
+  <script src="../../utils/functions/useApi.js"></script>
+  <script src="../../assets/script/auth-resend.js"></script>
+</body>
+</html>

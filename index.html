@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIQ SAAS | Automatize, Centralize e Otimize o Atendimento do seu Restaurante</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+  <!-- Estilos Oficiais (Sem CSS interno nem inline) -->
+  <link rel="stylesheet" href="assets/style/global.css">
+  <link rel="stylesheet" href="assets/style/components.css">
+  <link rel="stylesheet" href="assets/style/landing.css">
+</head>
+<body class="landing-body">
+
+  <!-- ====================================================
+       1. HEADER OFICIAL (Links idênticos à referência)
+       ==================================================== -->
+  <header class="landing-navbar">
+    <div class="landing-container">
+      <div class="landing-navbar-inner">
+        
+        <div class="landing-navbar-left">
+          <a href="index.html">
+            <img src="assets/images/logo.png" alt="LIQ SAAS" class="landing-brand-logo">
+          </a>
+
+          <!-- Links Exatos: Funcionalidades, Preços, FAQ -->
+          <nav class="landing-nav-links">
+            <a href="#funcionalidades" class="landing-nav-link">Funcionalidades</a>
+            <a href="#precos" class="landing-nav-link">Preços</a>
+            <a href="#faq" class="landing-nav-link">FAQ</a>
+          </nav>
+        </div>
+
+        <!-- Ações do Header (Desktop): Entrar e Começar agora -->
+        <div class="landing-navbar-right">
+          <a href="auth/login/index.html" class="landing-nav-login">Entrar</a>
+          <a href="auth/register/index.html" class="landing-nav-btn">Começar agora</a>
+        </div>
+
+        <!-- Botão Hamburger Mobile -->
+        <button type="button" id="btn-mobile-menu-toggle" class="landing-mobile-toggle" aria-label="Abrir menu de navegação" aria-expanded="false">
+          <span data-icon="menu" data-icon-size="20"></span>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Dropdown Mobile (Efeito de Vidro Desfocado com todos os links e botões) -->
+    <div class="landing-mobile-dropdown" id="mobile-nav-dropdown" aria-hidden="true">
+      <div class="landing-container mobile-dropdown-content">
+        <nav class="mobile-dropdown-nav">
+          <a href="#funcionalidades" class="mobile-dropdown-link">Funcionalidades</a>
+          <a href="#precos" class="mobile-dropdown-link">Preços</a>
+          <a href="#faq" class="mobile-dropdown-link">FAQ</a>
+        </nav>
+        <div class="mobile-dropdown-divider"></div>
+        <div class="mobile-dropdown-actions">
+          <a href="auth/login/index.html" class="mobile-dropdown-login">Entrar</a>
+          <a href="auth/register/index.html" class="mobile-dropdown-btn">Começar agora</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====================================================
+       2. SEÇÃO HERO
+       ==================================================== -->
+  <section class="landing-hero">
+    <!-- Efeitos Geométricos de Fundo (Squares Grid, Radial Glow & Gradiente) -->
+    <div class="hero-bg-gradient" aria-hidden="true"></div>
+    <div class="hero-bg-radial" aria-hidden="true"></div>
+    <div class="hero-bg-grid" aria-hidden="true"></div>
+
+    <div class="landing-container">
+      
+      <!-- Tag / Pill superior -->
+      <div>
+        <span class="hero-pill-badge">
+          <span data-icon="check" data-icon-size="14"></span>
+          <span>Tecnologia Multi-Tenant para Restaurantes</span>
+        </span>
+      </div>
+
+      <!-- Título Principal -->
+      <h1 class="hero-main-title">
+        Automatize, centralize e otimize seu atendimento e vendas no restaurante.
+      </h1>
+
+      <!-- Subtítulo -->
+      <p class="hero-main-subtitle">
+        Cardápio digital por QR Code nas mesas, gestão de pedidos em tempo real diretamente para a cozinha (KDS) e fidelização de clientes para elevar o seu ticket médio.
+      </p>
+
+      <!-- Botões de Ação -->
+      <div class="hero-cta-group">
+        <a href="auth/register/index.html" class="hero-btn-primary">
+          Começar Agora
+        </a>
+        <a href="https://wa.me/244923000111?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20LIQ%20SAAS" target="_blank" class="hero-btn-secondary">
+          <span>Fale connosco</span>
+          <span data-icon="chevronRight" data-icon-size="14"></span>
+        </a>
+      </div>
+
+      <!-- Mockup Visual Principal (hero-img.png) - Sem box, mais para cima e com animação 3D Tilt -->
+      <div class="hero-mockup-wrapper" id="hero-mockup-container">
+        <img src="assets/images/hero-img.png" alt="Interface Operacional LIQ SAAS" class="hero-mockup-image" id="hero-mockup-img">
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====================================================
+       3. SEÇÃO DESAFIOS (Dark Forest)
+       ==================================================== -->
+  <section class="landing-challenges-section">
+    <div class="landing-container">
+      
+      <h2 class="challenges-title">O seu negócio sofre com estes desafios?</h2>
+
+      <div class="challenges-grid">
+        
+        <div class="challenge-item">
+          <div class="challenge-icon">
+            <span data-icon="clock" data-icon-size="18"></span>
+          </div>
+          <div class="challenge-text">Atendimento ineficiente e lento</div>
+        </div>
+
+        <div class="challenge-item">
+          <div class="challenge-icon">
+            <span data-icon="orders" data-icon-size="18"></span>
+          </div>
+          <div class="challenge-text">Múltiplas comandas de papel virando bagunça</div>
+        </div>
+
+        <div class="challenge-item">
+          <div class="challenge-icon">
+            <span data-icon="trendingUp" data-icon-size="18"></span>
+          </div>
+          <div class="challenge-text">Perdendo vendas nos horários de maior pico</div>
+        </div>
+
+        <div class="challenge-item">
+          <div class="challenge-icon">
+            <span data-icon="customers" data-icon-size="18"></span>
+          </div>
+          <div class="challenge-text">Clientes desistindo por falta de atendimento rápido</div>
+        </div>
+
+      </div>
+
+      <div class="challenges-chevron">
+        <span data-icon="chevronDown" data-icon-size="24"></span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====================================================
+       5. SEÇÃO AUTOMAÇÃO (3 Cards com Visual)
+       ==================================================== -->
+  <section class="landing-automate-section">
+    <div class="landing-container">
+      
+      <div class="automate-header">
+        <h2 class="automate-title">
+          Automatize o seu atendimento e <span>multiplique suas vendas</span>
+        </h2>
+      </div>
+
+      <div class="automate-cards-grid">
+        
+        <!-- Card 1 -->
+        <div class="automate-card">
+          <div class="automate-card-preview">
+            <div class="automate-preview-box">
+              <span data-icon="qr" data-icon-size="18"></span>
+              <span>QR Code na Mesa 07</span>
+            </div>
+          </div>
+          <div class="automate-card-body">
+            <h3 class="automate-card-title">Respostas instantâneas</h3>
+            <p class="automate-card-desc">
+              Nunca mais deixe um cliente esperando pelo menu. Ele visualiza fotos, preços e envia o pedido em segundos.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="automate-card">
+          <div class="automate-card-preview">
+            <div class="automate-preview-box">
+              <span data-icon="clock" data-icon-size="18"></span>
+              <span>KDS Cozinha Sincronizada</span>
+            </div>
+          </div>
+          <div class="automate-card-body">
+            <h3 class="automate-card-title">Cozinha guiada por tempo</h3>
+            <p class="automate-card-desc">
+              Identifique itens de preparo, acompanhe tempos de espera da comanda e entregue pedidos de forma organizada.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="automate-card">
+          <div class="automate-card-preview">
+            <div class="automate-preview-box">
+              <span data-icon="loyalty" data-icon-size="18"></span>
+              <span>Cupom BEMVINDO10</span>
+            </div>
+          </div>
+          <div class="automate-card-body">
+            <h3 class="automate-card-title">Fidelização e mais vendas</h3>
+            <p class="automate-card-desc">
+              Reconhecimento automático de clientes recorrentes, histórico de pedidos e cupons para acelerar a recompra.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====================================================
+       6. BANNER INTERMEDIÁRIO
+       ==================================================== -->
+  <section class="landing-mid-banner">
+    <div class="landing-container">
+      <h2 class="mid-banner-title">Comece a vender e atender com máxima velocidade.</h2>
+      <a href="auth/register/index.html" class="mid-banner-btn">Começar agora</a>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       7. GRID DE FUNCIONALIDADES (8 Cards)
+       ==================================================== -->
+  <section class="landing-features-section" id="funcionalidades">
+    <div class="landing-container">
+      
+      <span class="features-section-tag">Funcionalidades</span>
+      <h2 class="features-section-title">
+        Tudo que você precisa para transformar o <span>atendimento do seu negócio e vender mais</span>
+      </h2>
+
+      <div class="features-octa-grid">
+        
+        <!-- 1 -->
+        <div class="feature-box-card">
+          <div class="feature-box-icon">
+            <span data-icon="qr" data-icon-size="20"></span>
+          </div>
+          <h3 class="feature-box-title">Cardápios QR Code</h3>
+          <p class="feature-box-desc">QR codes únicos por mesa com leitura rápida e cardápio digital sempre atualizado.</p>
+        </div>
+
+        <!-- 2 -->
+        <div class="feature-box-card">
+          <div class="feature-box-icon">
+            <span data-icon="orders" data-icon-size="20"></span>
+          </div>
+          <h3 class="feature-box-title">Quadro KDS de Cozinha</h3>
+          <p class="feature-box-desc">Fluxo visual completo de preparação: Pendente, Confirmado, Preparando e Pronto.</p>
+        </div>
+
+        <!-- 3 -->
+        <div class="feature-box-card">
+          <div class="feature-box-icon">
+            <span data-icon="tables" data-icon-size="20"></span>
+          </div>
+          <h3 class="feature-box-title">Gestão de Mesas</h3>
+          <p class="feature-box-desc">Visualização gráfica de mesas ocupadas, disponíveis e controle de capacidade do salão.</p>
+        </div>
+
+        <!-- 4 -->
+        <div class="feature-box-card">
+          <div class="feature-box-icon">
+            <span data-icon="loyalty" data-icon-size="20"></span>
+          </div>
+          <h3 class="feature-box-title">Carteira de Fidelidade</h3>
+          <p class="feature-box-desc">Pontos acumulados em cada consumo na mesa para resgate automático em visitas futuras.</p>
+        </div>
+
+        <!-- 5 -->
+        <div class="feature-box-card">
+          <div class="feature-box-icon">
+            <span data-icon="analytics" data-icon-size="20"></span>
+          </div>
+          <h3 class="feature-box-title">Horários de Pico</h3>
+          <p class="feature-box-desc">Relatórios detalhados por hora do dia para otimizar escalas de garçons e cozinheiros.</p>
+        </div>
+
+        <!-- 6 -->
+        <div class="feature-box-card">
+          <div class="feature-box-icon">
+            <span data-icon="trendingUp" data-icon-size="20"></span>
+          </div>
+          <h3 class="feature-box-title">Mais Vendidos</h3>
+          <p class="feature-box-desc">Ranking de produtos com maior saída e contribuição para o faturamento em Kwanzas (Kz).</p>
+        </div>
+
+        <!-- 7 -->
+        <div class="feature-box-card">
+          <div class="feature-box-icon">
+            <span data-icon="coupons" data-icon-size="20"></span>
+          </div>
+          <h3 class="feature-box-title">Cupons Promocionais</h3>
+          <p class="feature-box-desc">Cupons de boas-vindas com desconto percentual ou valor fixo verificados no servidor.</p>
+        </div>
+
+        <!-- 8 -->
+        <div class="feature-box-card">
+          <div class="feature-box-icon">
+            <span data-icon="check" data-icon-size="20"></span>
+          </div>
+          <h3 class="feature-box-title">Segurança Corporativa</h3>
+          <p class="feature-box-desc">Isolamento multi-tenant de dados, verificação OTP e sessões com criptografia ativa.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====================================================
+       8. TABELA DE PREÇOS (Dark Forest)
+       ==================================================== -->
+  <section class="landing-pricing-section" id="precos">
+    <div class="landing-container">
+      
+      <div class="pricing-header">
+        <h2 class="pricing-title">Escolha o plano ideal para o seu negócio</h2>
+        <p class="pricing-subtitle">Planos flexíveis que crescem com o seu restaurante.</p>
+      </div>
+
+      <!-- Toggle Mensal / Anual -->
+      <div class="pricing-toggle-wrapper">
+        <span>Mensal</span>
+        <div id="pricing-plan-toggle" class="pricing-toggle-switch"></div>
+        <span>Anual (15% OFF)</span>
+      </div>
+
+      <div class="pricing-cards-grid">
+        
+        <!-- Plano Starter -->
+        <div class="pricing-card">
+          <div>
+            <div class="pricing-plan-name">STARTER</div>
+            <div class="pricing-plan-price" id="price-val-starter">
+              17.000,00 AKZ <span>/ Mês</span>
+            </div>
+            <div class="pricing-plan-subtitle">Perfeito para começar e testar a plataforma</div>
+
+            <ul class="pricing-features-list">
+              <li class="pricing-feature-row">
+                <span class="pricing-check-icon" data-icon="check" data-icon-size="16"></span>
+                <span>Até 10 mesas</span>
+              </li>
+              <li class="pricing-feature-row">
+                <span class="pricing-check-icon" data-icon="check" data-icon-size="16"></span>
+                <span>Cardápio QR Code Dinâmico</span>
+              </li>
+              <li class="pricing-feature-row">
+                <span class="pricing-check-icon" data-icon="check" data-icon-size="16"></span>
+                <span>Gestão básica de pedidos</span>
+              </li>
+              <li class="pricing-feature-row">
+                <span class="pricing-check-icon" data-icon="check" data-icon-size="16"></span>
+                <span>Suporte por e-mail</span>
+              </li>
+            </ul>
+          </div>
+          <a href="auth/register/index.html" class="pricing-card-btn pricing-card-btn-outline">Começar agora</a>
+        </div>
+
+        <!-- Plano Pro (Recomendado) -->
+        <div class="pricing-card pricing-card-featured">
+          <div class="pricing-featured-badge">Recomendado</div>
+          <div>
+            <div class="pricing-plan-name">PRO</div>
+            <div class="pricing-plan-price" id="price-val-pro">
+              46.750,00 AKZ <span>/ Mês</span>
+            </div>
+            <div class="pricing-plan-subtitle">Ideal para pequenas e médias empresas</div>
+
+            <ul class="pricing-features-list">
+              <li class="pricing-feature-row">
+                <span class="pricing-check-icon" data-icon="check" data-icon-size="16"></span>
+                <span>Mesas ilimitadas</span>
+              </li>
+              <li class="pricing-feature-row">
+                <span class="pricing-check-icon" data-icon="check" data-icon-size="16"></span>
+                <span>Quadro operacional KDS para cozinha</span>
+              </li>
+              <li class="pricing-feature-row">
+                <span class="pricing-check-icon" data-icon="check" data-icon-size="16"></span>
+                <span>Programa de fidelidade & cupons</span>
+              </li>
+              <li class="pricing-feature-row">
+                <span class="pricing-check-icon" data-icon="check" data-icon-size="16"></span>
+                <span>Horários de pico e ranking de vendas</span>
+              </li>
+              <li class="pricing-feature-row">
+                <span class="pricing-check-icon" data-icon="check" data-icon-size="16"></span>
+                <span>Suporte prioritário via WhatsApp</span>
+              </li>
+            </ul>
+          </div>
+          <a href="auth/register/index.html" class="pricing-card-btn pricing-card-btn-featured">Começar agora</a>
+        </div>
+
+        <!-- Plano Enterprise -->
+        <div class="pricing-card">
+          <div>
+            <div class="pricing-plan-name">ENTERPRISE</div>
+            <div class="pricing-plan-price">
+              Sob consulta
+            </div>
+            <div class="pricing-plan-subtitle">Solução para quem quer escalar redes</div>
+
+            <ul class="pricing-features-list">
+              <li class="pricing-feature-row">
+                <span class="pricing-check-icon" data-icon="check" data-icon-size="16"></span>
+                <span>Múltiplas lojas e filiais</span>
+              </li>
+              <li class="pricing-feature-row">
+                <span class="pricing-check-icon" data-icon="check" data-icon-size="16"></span>
+                <span>Integrações de PDV dedicadas</span>
+              </li>
+              <li class="pricing-feature-row">
+                <span class="pricing-check-icon" data-icon="check" data-icon-size="16"></span>
+                <span>Treinamento de equipe</span>
+              </li>
+              <li class="pricing-feature-row">
+                <span class="pricing-check-icon" data-icon="check" data-icon-size="16"></span>
+                <span>Gestor de conta dedicado</span>
+              </li>
+              <li class="pricing-feature-row">
+                <span class="pricing-check-icon" data-icon="check" data-icon-size="16"></span>
+                <span>Suporte PREMIUM com SLA</span>
+              </li>
+            </ul>
+          </div>
+          <a href="auth/register/index.html" class="pricing-card-btn pricing-card-btn-outline">Entrar em contacto</a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====================================================
+       9. SEÇÃO PROPOSTA DE VALOR (3 Colunas)
+       ==================================================== -->
+  <section class="landing-value-section">
+    <div class="landing-container">
+      
+      <h2 class="value-section-title">
+        Por que o LIQ SAAS é a melhor solução para o seu negócio?
+      </h2>
+
+      <div class="value-cards-grid">
+        
+        <div class="value-card">
+          <div class="value-card-icon">
+            <span data-icon="trendingUp" data-icon-size="20"></span>
+          </div>
+          <h3 class="value-card-title">Aumento na conversão de vendas</h3>
+          <p class="value-card-desc">
+            Clientes pedem mais rápido sem barreiras de garçom, impulsionando a venda sugestiva de bebidas e sobremesas.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-card-icon">
+            <span data-icon="orders" data-icon-size="20"></span>
+          </div>
+          <h3 class="value-card-title">Redução de custos operacionais</h3>
+          <p class="value-card-desc">
+            Com atendimento automatizado na mesa, reduza drasticamente custos com impressões de cardápios e erros em pedidos.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-card-icon">
+            <span data-icon="dashboard" data-icon-size="20"></span>
+          </div>
+          <h3 class="value-card-title">Você continua no controle</h3>
+          <p class="value-card-desc">
+            Monitore mesas, faturamento em Kwanzas e desempenho da cozinha de onde estiver com relatórios em tempo real.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====================================================
+       10. BANNER FINAL CTA
+       ==================================================== -->
+  <section class="landing-cta-banner">
+    <div class="landing-container">
+      <h2 class="cta-banner-title">Pronto para aumentar o seu faturamento?</h2>
+      <a href="auth/register/index.html" class="cta-banner-btn">Começar agora</a>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       11. FAQ ACCORDION COMPLETO
+       ==================================================== -->
+  <section class="landing-faq-section" id="faq">
+    <div class="landing-container">
+      <div class="faq-layout-grid">
+        
+        <div>
+          <h2 class="faq-left-title">Perguntas Frequentes</h2>
+          <p class="faq-left-desc">
+            Tudo o que você precisa saber sobre a operação e implantação da plataforma.
+          </p>
+        </div>
+
+        <div>
+          <div class="faq-accordion-container">
+            
+            <!-- Pergunta 1 -->
+            <div class="faq-item active">
+              <button type="button" class="faq-question-btn">
+                <span>Como os clientes acessam o cardápio no restaurante?</span>
+                <span class="faq-arrow-icon" data-icon="chevronDown" data-icon-size="16"></span>
+              </button>
+              <div class="faq-answer-panel">
+                Basta apontar a câmera do smartphone para o QR Code localizado na mesa. O menu abre instantaneamente no navegador do telemóvel, sem necessidade de baixar aplicativos ou realizar cadastros complexos.
+              </div>
+            </div>
+
+            <!-- Pergunta 2 -->
+            <div class="faq-item">
+              <button type="button" class="faq-question-btn">
+                <span>Preciso de conhecimentos técnicos para configurar?</span>
+                <span class="faq-arrow-icon" data-icon="chevronDown" data-icon-size="16"></span>
+              </button>
+              <div class="faq-answer-panel">
+                Não. A plataforma foi desenhada para ser simples e intuitiva. Você cadastra suas categorias e produtos em minutos através do painel do gestor.
+              </div>
+            </div>
+
+            <!-- Pergunta 3 -->
+            <div class="faq-item">
+              <button type="button" class="faq-question-btn">
+                <span>Como funciona o quadro KDS para a cozinha?</span>
+                <span class="faq-arrow-icon" data-icon="chevronDown" data-icon-size="16"></span>
+              </button>
+              <div class="faq-answer-panel">
+                Qualquer tablet, computador ou tela conectada à internet na cozinha exibe os pedidos em tempo real à medida que os clientes finalizam na mesa, organizados por tempo de chegada e status.
+              </div>
+            </div>
+
+            <!-- Pergunta 4 -->
+            <div class="faq-item">
+              <button type="button" class="faq-question-btn">
+                <span>O sistema calcula descontos e cupons com segurança?</span>
+                <span class="faq-arrow-icon" data-icon="chevronDown" data-icon-size="16"></span>
+              </button>
+              <div class="faq-answer-panel">
+                Sim. Toda a validação de regras de cupons, valor mínimo de consumo e limite de utilizações por cliente é processada e blindada estritamente no backend.
+              </div>
+            </div>
+
+            <!-- Pergunta 5 -->
+            <div class="faq-item">
+              <button type="button" class="faq-question-btn">
+                <span>Posso cancelar a assinatura quando desejar?</span>
+                <span class="faq-arrow-icon" data-icon="chevronDown" data-icon-size="16"></span>
+              </button>
+              <div class="faq-answer-panel">
+                Sim. Não há contratos de permanência forçada no plano mensal. Você tem total liberdade para pausar ou cancelar o serviço quando preferir.
+              </div>
+            </div>
+
+            <!-- Pergunta 6 -->
+            <div class="faq-item">
+              <button type="button" class="faq-question-btn">
+                <span>Posso testar a plataforma antes de assinar?</span>
+                <span class="faq-arrow-icon" data-icon="chevronDown" data-icon-size="16"></span>
+              </button>
+              <div class="faq-answer-panel">
+                Com certeza. Disponibilizamos demonstração completa com o Café Central, permitindo testar pedidos na Mesa 07 e acompanhar o painel operacional da cozinha.
+              </div>
+            </div>
+
+          </div>
+
+          <div class="faq-support-footer">
+            Não encontrou o que você procura? <a href="auth/register/index.html">Entre em contato com nossa equipe de suporte</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       12. FOOTER OFICIAL DARK FOREST (Logo branca)
+       ==================================================== -->
+  <footer class="landing-footer-dark">
+    <div class="landing-container">
+      
+      <div class="footer-top-grid">
+        
+        <!-- Coluna 1: Marca & Contato (Logo branca em fundo verde escuro) -->
+        <div>
+          <img src="assets/images/logo-white.png" alt="LIQ SAAS" class="footer-brand-logo">
+          <p class="footer-brand-desc">
+            Transforme o seu atendimento e faturamento com pedidos por mesa e fidelização.
+          </p>
+          <div class="footer-brand-email">
+            <span data-icon="check" data-icon-size="14"></span>
+            <span>suporte@liqsaas.ao</span>
+          </div>
+        </div>
+
+        <!-- Coluna 2: Navegação -->
+        <div>
+          <div class="footer-column-title">Navegação</div>
+          <ul class="footer-links-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#funcionalidades">Funcionalidades</a></li>
+            <li><a href="user/index.html" target="_blank">Como funciona</a></li>
+            <li><a href="#precos">Preços</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 3: Termos -->
+        <div>
+          <div class="footer-column-title">Termos</div>
+          <ul class="footer-links-list">
+            <li><a href="#">Política de privacidade</a></li>
+            <li><a href="#">Termos de uso</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 4: Já sou cliente -->
+        <div>
+          <div class="footer-column-title">Já sou cliente</div>
+          <ul class="footer-links-list">
+            <li><a href="auth/login/index.html">Acessar plataforma</a></li>
+            <li><a href="client/index.html?t=07" target="_blank">Cardápio do Cliente</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Linha Inferior de Copyright -->
+      <div class="footer-bottom-row">
+        <div>Copyright &copy; LIQ SAAS 2026. Todos os direitos reservados.</div>
+        <div>Tecnologia Angolana para Restaurantes e Hotelaria</div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Scripts Padronizados (Sem CSS interno nem inline) -->
+  <script src="assets/script/icons.js"></script>
+  <script src="utils/function/useAlert.js"></script>
+  <script src="utils/functions/useValidation.js"></script>
+  <script src="utils/functions/useApi.js"></script>
+  <script src="assets/script/landing.js"></script>
+</body>
+</html>
